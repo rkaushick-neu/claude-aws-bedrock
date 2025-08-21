@@ -13,9 +13,9 @@ This repository contains my notes for the [Claude with Amazon Bedrock](https://a
 ## Local (Python)
 
 1. Create a virtual environment.
-```bash
-python -m venv .venv
-```
+    ```bash
+    python -m venv .venv
+    ```
 2. Activate the virtual environment.
 
     On MacOS/ Linux:
@@ -26,5 +26,9 @@ python -m venv .venv
     ```bash
     .\.venv\Scripts\activate.bat
     ```
-3. Create `.env` file for the secret keys and add the API Key from step 4 in the AWS Setup
-4. Load the environment variables before making a request to use AWS Bedrock.
+3. Download dependencies from the `requirements.txt` file:
+    ```bash
+    pip install -r requirements.txt
+    ```
+4. Create `.env` file for the secret keys and add the API Key from step 4 in the AWS Setup
+5. Load the environment variables before making a request to use AWS Bedrock.
