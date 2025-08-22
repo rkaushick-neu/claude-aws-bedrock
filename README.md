@@ -58,9 +58,9 @@ User Message:
 
 ```json
 {
-    'role': 'user', 
-    'content': [{
-            'text': 'What is 1+1?'
+    "role": "user", 
+    "content": [{
+            "text": "What is 1+1?"
         }
     ]
 }
@@ -70,9 +70,9 @@ AI Assistant Message:
 
 ```json
 {
-    'role': 'assistant', 
-    'content': [{
-            'text': '1+1 = 2'
+    "role": "assistant", 
+    "content": [{
+            "text": "1+1 = 2"
         }
     ]
 }
