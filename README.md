@@ -101,7 +101,7 @@ response = client.converse(**params)
 To abstract this further, we can define a method called `chat` which can perform this API call.
 
 ```python
-def chat(messages, system=None, temperature=1.0):
+def chat(messages: list[dict], system: str | None = None, temperature: float = 1.0):
     params = {
         "modelId": model_id,
         "messages": messages,
@@ -117,6 +117,7 @@ def chat(messages, system=None, temperature=1.0):
 ## Multi-Turn Conversations
 
 As Claude on AWS Bedrock does not have any memory. For continuing previous conversations, we must chain messages together in a list to give the AI context.
+
 ``` python
-messages = [user_message1, assistant_message1, usermessage2, assistant_message2, ...] 
+messages = [user_message1, assistant_message1, user_message2, assistant_message2, ...] 
 ```
