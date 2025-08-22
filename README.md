@@ -101,7 +101,7 @@ response = client.converse(**params)
 To abstract this further, we can define a method called `chat` which can perform this API call.
 
 ```python
-def chat(messages: list[dict], system: str | None = None, temperature: float = 1.0):
+def chat(messages: list[dict], system: str | None = None, temperature: float = 1.0) -> str:
     params = {
         "modelId": model_id,
         "messages": messages,
