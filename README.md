@@ -190,3 +190,15 @@ Therefore, while looping to retrieve the content from the event, we can extract 
 ```python
 response["stream"]["contentBlockDelta"]["delta"]["text"]
 ```
+
+## Controlling Outputs
+
+### Message Prefilling
+
+![Message Prefilling Code Snippet](/images/Message_prefilling_code.png)
+
+### Stop Sequences
+
+Force Claude to end its response immediately when it encounters a specific text.
+
+![Stop Sequences](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748557717%2F05_-_009_-_Controlling_Model_Output_14.1748557717103.png)
