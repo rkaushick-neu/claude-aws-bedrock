@@ -121,3 +121,72 @@ As Claude on AWS Bedrock does not have any memory. For continuing previous conve
 ``` python
 messages = [user_message1, assistant_message1, user_message2, assistant_message2, ...] 
 ```
+
+## Streaming
+
+We can stream data from Bedrock using the **converse_stream** function:
+
+```python
+response = client.converse_stream(messages=messages, modelId=model_id)
+```
+
+![Streaming text as it gets generated](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748557673%2F05_-_008_-_Streaming_03.1748557673079.png)
+
+### Response
+
+```json
+{
+    "ResponseMetadata": {
+        "RequestId": "4baa0075-f4ae-4eee-bb16-db1fe1c3f724", 
+        "HTTPStatusCode": 200, 
+        "HTTPHeaders": {
+            "date": "Sat, 23 Aug 2025 15:33:59 GMT", 
+            "content-type": "application/vnd.amazon.eventstream", 
+            "transfer-encoding": "chunked", 
+            "connection": "keep-alive", 
+            "x-amzn-requestid": "4baa0075-f4ae-4eee-bb16-db1fe1c3f724"
+        }, 
+        "RetryAttempts": 0
+    }, 
+    "stream": <botocore.eventstream.EventStream object at 0x10b9a7b10>
+}
+```
+
+### Steam Events
+
+The stream event contains many event types within the response stream object:
+
+![Stream event components](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748557673%2F05_-_008_-_Streaming_12.1748557673618.png)
+
+
+
+#### Response Stream Event Objects
+
+Here we get a stream object generator which we can loop through to display the message. Looping through the stream object:
+
+```json
+{"messageStart": {"role": "assistant"}}
+{"contentBlockDelta": {"delta": {"text": "F"}, "contentBlockIndex": 0}}
+{"contentBlockDelta": {"delta": {"text": "al"}, "contentBlockIndex": 0}}
+{"contentBlockDelta": {"delta": {"text": "seData"}, "contentBlockIndex": 0}}
+{"contentBlockDelta": {"delta": {"text": " is a fictional database"}, "contentBlockIndex": 0}}
+// ... multiple more "contentBlockDelta"s
+{"contentBlockDelta": {"delta": {"text": " systems without"}, "contentBlockIndex": 0}}
+{"contentBlockDelta": {"delta": {"text": " privacy concerns."}, "contentBlockIndex": 0}}
+{"contentBlockStop": {"contentBlockIndex": 0}}
+{"messageStop": {"stopReason": "end_turn"}}
+{"metadata": {
+    "usage": {
+        "inputTokens": 18, 
+        "outputTokens": 54, 
+        "totalTokens": 72
+    }, 
+    "metrics": {"latencyMs": 1822}
+    }
+}
+```
+
+Therefore, while looping to retrieve the content from the event, we can extract it from
+```python
+response["stream"]["contentBlockDelta"]["delta"]["text"]
+```
