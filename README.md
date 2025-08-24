@@ -202,3 +202,25 @@ response["stream"]["contentBlockDelta"]["delta"]["text"]
 Force Claude to end its response immediately when it encounters a specific text.
 
 ![Stop Sequences](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748557717%2F05_-_009_-_Controlling_Model_Output_14.1748557717103.png)
+
+### Generating Structured Code Outputs with Message Prefilling & Stop Sequences
+
+```python
+prompt = """
+Generate three different sample AWS CLI commands. Each should be very short.
+"""
+
+add_user_message(messages, prompt)
+add_assistant_message(messages, "Here are the three commands in a single block without any comments: \n```bash")
+
+text = chat(messages, stop_sequences=["```"])
+```
+
+Through this technique we make sure that Claude generates only code. It would not generate any headings or other text in the beginning because of the prefilled message. As soon as the code is generated, the stop sequence causes Claude to stop generating any further explanations.
+
+The above technique can also be used for other structured data such as:
+- Code snippets (Python, JavaScript, ...)
+- Bulleted lists
+- CSV data
+- Configuration files
+- Any format where clean, copyable output matters
