@@ -1,0 +1,11 @@
+[
+  {
+    "task": "Write a Python function to extract AWS IAM role names from a list of ARNs using regex, filtering out non-IAM role ARNs"
+  },
+  {
+    "task": "Create a JSON configuration for an AWS CloudFormation stack that defines a basic VPC with public and private subnets across multiple availability zones"
+  },
+  {
+    "task": "Develop a Python script to parse AWS CloudTrail log files and generate a summary of API call frequencies by service"
+  }
+]
