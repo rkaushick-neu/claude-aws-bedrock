@@ -7,7 +7,7 @@ This repository contains my notes for the [Claude with Amazon Bedrock](https://a
 ### AWS
 
 1. Login to AWS Console & navigate to Bedrock.
-2. Make sure that you are in the correct region (eg: US East 2) --> This is really important as the models that we will request in the next step are specific to the regions.
+2. Make sure that you are in the correct region (eg: US East 2) --> This is really important as the models that we will request in the next step are specific to a region.
 3. Request for Model Access for the LLM (if not already granted)
 4. Generate API Keys (Short term or long term) and copy it.
    This generates a new IAM User with the right role.
@@ -32,7 +32,7 @@ This repository contains my notes for the [Claude with Amazon Bedrock](https://a
     ```bash
     pip install -r requirements.txt
     ```
-4. Create `.env` file for the secret keys and add the API Key from step 4 in the AWS Setup
+4. Create `.env` file for the secret keys and add the API Key from step 4 in the AWS Setup. The `.env.example` is an example env file.
 5. Load the environment variables before making a request to use AWS Bedrock.
 
 ## Bedrock Runtime
@@ -91,7 +91,8 @@ params = {
         "text": system_prompt
     }],
     "inferenceConfig": { 
-        "temperature": temperature 
+        "temperature": temperature,
+        "stopSequences": stop_sequences 
     }
 }
 
@@ -101,11 +102,14 @@ response = client.converse(**params)
 To abstract this further, we can define a method called `chat` which can perform this API call.
 
 ```python
-def chat(messages: list[dict], system: str | None = None, temperature: float = 1.0) -> str:
+def chat(messages: list[dict], system: str | None = None, temperature: float = 1.0, , stop_sequences: list[str] = []) -> str:
     params = {
         "modelId": model_id,
         "messages": messages,
-        "inferenceConfig": { "temperature": temperature }
+        "inferenceConfig": { 
+            "temperature": temperature,
+            "stopSequences": stop_sequences
+        }
     }
     if system:
         params["system"] = [{"text": system}]
