@@ -5,6 +5,11 @@ This repository contains my notes for the [Claude with Amazon Bedrock](https://a
 ## High Level Overview
 ![Architecute overview](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748557572%2F05_-_001_-_Accessing_the_API_08.1748557571907.png)
 
+## My Learnings
+
+1. [Working with the Amazon AWS Bedrock API](./1_BEDROCK_API.md)
+2. [Prompt Evaluations](./2_PROMPT_EVALS.md)
+
 ## Setup
 
 ### AWS
@@ -37,8 +42,3 @@ This repository contains my notes for the [Claude with Amazon Bedrock](https://a
     ```
 4. Create `.env` file for the secret keys and add the API Key from step 4 in the AWS Setup. The `.env.example` is an example env file.
 5. Load the environment variables before making a request to use AWS Bedrock.
-
-## My Learnings
-
-1. [Working with the Amazon AWS Bedrock API](./1_BEDROCK_API.md)
-2. [Prompt Evaluations](./2_PROMPT_EVALS.md)
