@@ -12,13 +12,13 @@ There are many different ways to evaluate workflows. Here are the steps:
 
 1. **Create an Initial Prompt**
 2. **Create an Evaluation Dataset:** Could be 10s/ 100s or 1000s of questions.
-3. **Feed Each Question into Claude:** Merge the question into the prompt adn feed it through Claude.
+3. **Feed Each Question into Claude:** Merge the question into the prompt and feed it through Claude.
 4. **Feed Through a Grader & Find the Average:** Evaluates each response with a score. We can take the average score as a measure of overall score for the prompt.
 5. **Change Prompt & Repeat**
 
 ## Goal
 
-The prompt should take a user's tsk description and return one of the three outputs:
+The prompt should take a user's task description and return one of the three outputs:
 1. Python code
 2. JSON config
 3. Regular expressions
