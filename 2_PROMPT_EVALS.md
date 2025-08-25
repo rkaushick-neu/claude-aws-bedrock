@@ -55,3 +55,27 @@ prompt = """
 ```
 
 Since we want the dataset to strictly be in JSON, we use **message prefilling** & **stop sequences**. The above prompt helped us generate the evaluation dataset: [dataset.json](./evals/dataset.json)
+
+### Step 3: Run the Prompt
+We run the initial prompt on the test-cases to get the model output.
+
+### Step 4: Run the Grader
+We feed the test-case and the output to the grader.
+
+#### Graders
+
+Three can be three types of graders:
+
+![Graders](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748557941%2F06_-_005_-_Model_Based_Grading_03.1748557941095.png)
+
+
+#### Evaluation Criteria
+We must clearly define evaluation criteria for a successful grader. For our code generation use-case, we can focus on the following evaluation criteria:
+
+1. Format
+2. Valid Syntax
+3. Task Following
+
+We can use different graders for each evaluation criteria as shown below:
+
+![Graders for each evaluation criteria](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748557943%2F06_-_005_-_Model_Based_Grading_07.1748557942738.png)
