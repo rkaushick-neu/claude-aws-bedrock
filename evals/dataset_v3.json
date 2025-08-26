@@ -1,0 +1,17 @@
+[
+  {
+    "task": "Create a JSON policy that restricts IAM users from launching EC2 instances in regions other than us-east-1 and us-west-2",
+    "format": "json",
+    "solution_criteria": "Policy must use AWS IAM policy conditions to limit region access, uses Condition block with StringNotEquals or StringEquals"
+  },
+  {
+    "task": "Write a Python function to extract AWS resource tags from a list of EC2 instances and generate a summary report",
+    "format": "python",
+    "solution_criteria": "Function should take a list of instance dictionaries, return a consolidated tag report, handle potential missing tags"
+  },
+  {
+    "task": "Use a regex pattern to validate and sanitize AWS resource naming conventions (e.g., valid EC2 instance names)",
+    "format": "regex",
+    "solution_criteria": "Regex must enforce rules like: start with a letter, allow alphanumeric and hyphen, max length 63 characters"
+  }
+]

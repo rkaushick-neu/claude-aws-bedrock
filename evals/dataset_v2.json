@@ -1,0 +1,14 @@
+[
+  {
+    "task": "Create a JSON policy that allows read-only access to a specific S3 bucket and its contents",
+    "format": "json"
+  },
+  {
+    "task": "Write a Python function to list all EC2 instances with a specific tag using Boto3",
+    "format": "python"
+  },
+  {
+    "task": "Use a regular expression to validate and extract AWS resource names that follow specific naming conventions (e.g., must start with 'prod-' and contain only lowercase letters and hyphens)",
+    "format": "regex"
+  }
+]
