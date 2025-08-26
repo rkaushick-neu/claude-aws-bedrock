@@ -1,5 +1,7 @@
 # 2. Prompt Evaluations
 
+Relevant Notebook: [001_Prompt_Evals.ipynb](./notebooks/2-prompt-evaluations/001_Prompt_Evals.ipynb)
+
 To build reliable AI applications, we need to consider **Prompt Engineering** & **Prompt Evaluation**
 
 ![Prompt Engineering & Prompt Evaluation](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748557873%2F06_-_001_-_Prompt_Evaluation_00.1748557873297.png)
@@ -45,7 +47,9 @@ prompt = """
     Example output:
     [
         {
-            "task": "Description of task"
+            "task": "Description of task",
+            "format": "json" or "python" or "regex",
+            "solution_criteria": "Key criteria to evaluate the solution"
         },
         ...additional
     ]
@@ -54,13 +58,13 @@ prompt = """
     """
 ```
 
-Since we want the dataset to strictly be in JSON, we use **message prefilling** & **stop sequences**. The above prompt helped us generate the evaluation dataset: [dataset.json](./evals/dataset.json)
+Since we want the dataset to strictly be in JSON, we use **message prefilling** & **stop sequences**. The above prompt helped us generate the evaluation dataset: [dataset_v3.json](./evals/dataset_v3.json)
 
 ### Step 3: Run the Prompt
 We run the initial prompt on the test-cases to get the model output.
 
 ### Step 4: Run the Grader
-We feed the test-case and the output to the grader.
+We feed the test-case and the output to the graders.
 
 #### Graders
 
@@ -79,3 +83,7 @@ We must clearly define evaluation criteria for a successful grader. For our code
 We can use different graders for each evaluation criteria as shown below:
 
 ![Graders for each evaluation criteria](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748557943%2F06_-_005_-_Model_Based_Grading_07.1748557942738.png)
+
+### Step 5: Run The Evaluation
+
+We loop through each record in the evaluation dataset, and run all the above steps. We can now evaluate the prompt based on the score for each of these test cases. Finally, we iterate and update the prompt to see if it improves the overall score.
