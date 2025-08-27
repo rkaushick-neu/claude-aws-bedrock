@@ -1,0 +1,49 @@
+[
+  {
+    "prompt_inputs": {
+      "height": "183",
+      "weight": "82",
+      "goal": "Maintain weight while maximizing energy for Olympic swimming qualification meet in 2 days. Need 4500-5000 daily calories with 60% carbs, 25% protein.",
+      "restrictions": "No dairy, needs easily digestible foods"
+    },
+    "solution_criteria": [
+      "Includes 3 full meals plus snacks totaling 4500-5000 calories",
+      "Maintains approximately 60% carbs, 25% protein macro ratio",
+      "Avoids dairy and includes only easily digestible foods"
+    ],
+    "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+    "scenario": "Test with a competitive swimmer preparing for a major competition, requiring high carbs and protein while staying within caloric goals for weight class"
+  },
+  {
+    "prompt_inputs": {
+      "height": "178",
+      "weight": "75",
+      "goal": "Build muscle mass through crossfit training while following a whole-food vegan diet",
+      "restrictions": "Vegan, no processed foods, no supplements"
+    },
+    "solution_criteria": [
+      "Includes 3 full meals for one day",
+      "All foods are whole-food vegan (no processed items)",
+      "Provides adequate protein sources for muscle building",
+      "Meals are properly timed around training"
+    ],
+    "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+    "scenario": "Test with a vegan crossfit athlete looking to build muscle mass while avoiding processed foods and supplements"
+  },
+  {
+    "prompt_inputs": {
+      "height": "175",
+      "weight": "68",
+      "goal": "Complete daily 15km training run while maintaining stable blood sugar levels for upcoming marathon",
+      "restrictions": "Type 2 diabetes requiring careful carbohydrate timing and monitoring, no artificial sweeteners"
+    },
+    "solution_criteria": [
+      "Includes 3-4 main meals and 2-3 snacks spread throughout the day",
+      "Specifies meal timing relative to training run",
+      "Incorporates low glycemic index carbohydrates",
+      "Lists portion sizes for carbohydrate-containing foods"
+    ],
+    "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+    "scenario": "Test with an aging marathon runner with diabetes who needs balanced blood sugar levels throughout training day"
+  }
+]
