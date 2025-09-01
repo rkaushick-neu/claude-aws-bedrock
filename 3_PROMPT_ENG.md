@@ -2,6 +2,7 @@
 
 Relevant Notebooks:
 - [001_prompting.ipynb](./notebooks/3-prompt-engineering/001_prompting.ipynb)
+- [002_exercise.ipynb](./notebooks/3-prompt-engineering/002_exercise.ipynb)
 
 Improving our prompt to get a more reliable & higher quality outputs.
 
