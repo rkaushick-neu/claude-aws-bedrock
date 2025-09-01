@@ -1,0 +1,403 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Prompt Evaluation Report</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 20px;
+                color: #333;
+            }
+            .header {
+                background-color: #f0f0f0;
+                padding: 20px;
+                border-radius: 5px;
+                margin-bottom: 20px;
+            }
+            .summary-stats {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .stat-box {
+                background-color: #fff;
+                border-radius: 5px;
+                padding: 15px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                flex-basis: 30%;
+                min-width: 200px;
+            }
+            .stat-value {
+                font-size: 24px;
+                font-weight: bold;
+                margin-top: 5px;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+            th {
+                background-color: #4a4a4a;
+                color: white;
+                text-align: left;
+                padding: 12px;
+            }
+            td {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+                vertical-align: top;
+            }
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            .output-cell {
+                white-space: pre-wrap;
+            }
+            .score {
+                font-weight: bold;
+                padding: 5px 10px;
+                border-radius: 3px;
+                display: inline-block;
+            }
+            .score-high {
+                background-color: #c8e6c9;
+                color: #2e7d32;
+            }
+            .score-medium {
+                background-color: #fff9c4;
+                color: #f57f17;
+            }
+            .score-low {
+                background-color: #ffcdd2;
+                color: #c62828;
+            }
+            .output {
+                overflow: auto;
+                white-space: pre-wrap;
+            }
+
+            .output pre {
+                background-color: #f5f5f5;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                padding: 10px;
+                margin: 0;
+                font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+                font-size: 14px;
+                line-height: 1.4;
+                color: #333;
+                box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+                overflow-x: auto;
+                white-space: pre-wrap; 
+                word-wrap: break-word; 
+            }
+
+            td {
+                width: 20%;
+            }
+            .score-col {
+                width: 80px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Prompt Evaluation Report</h1>
+            <div class="summary-stats">
+                <div class="stat-box">
+                    <div>Total Test Cases</div>
+                    <div class="stat-value">3</div>
+                </div>
+                <div class="stat-box">
+                    <div>Average Score</div>
+                    <div class="stat-value">10.0 / 10</div>
+                </div>
+                <div class="stat-box">
+                    <div>Pass Rate (≥7)</div>
+                    <div class="stat-value">100.0%</div>
+                </div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Scenario</th>
+                    <th>Prompt Inputs</th>
+                    <th>Solution Criteria</th>
+                    <th>Output</th>
+                    <th>Score</th>
+                    <th>Reasoning</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+            <tr>
+                <td>Test with a vegan crossfit athlete looking to build muscle mass while avoiding processed foods and supplements</td>
+                <td class="prompt-inputs"><strong>height:</strong> 178<br><strong>weight:</strong> 75<br><strong>goal:</strong> Build muscle mass through crossfit training while following a whole-food vegan diet<br><strong>restrictions:</strong> Vegan, no processed foods, no supplements</td>
+                <td class="criteria">• Includes 3 full meals for one day<br>• All foods are whole-food vegan (no processed items)<br>• Provides adequate protein sources for muscle building<br>• Meals are properly timed around training</td>
+                <td class="output"><pre>I'll help create a meal plan following those steps.
+
+1. Daily Calorie Calculation:
+- Basal metabolic rate (BMR) ≈ 1,725 calories
+- With high activity + muscle building goal ≈ 2,800 calories needed
+
+2. Macro Distribution:
+- Protein: 120g (17%)
+- Fats: 78g (25%)
+- Carbs: 405g (58%)
+
+3. Meal Timing (5 meals):
+- Pre-workout breakfast: 7:00 AM
+- Post-workout snack: 10:30 AM
+- Lunch: 1:00 PM
+- Afternoon snack: 4:00 PM
+- Dinner: 7:00 PM
+
+4. Meal Plan:
+
+Breakfast (7:00 AM) - 650 calories
+- Oatmeal bowl:
+  * Steel-cut oats (80g)
+  * Banana (120g)
+  * Mixed berries (100g)
+  * Chia seeds (15g)
+  * Almonds (30g)
+  * Plant milk (240ml)
+
+Post-workout (10:30 AM) - 400 calories
+- Smoothie:
+  * Dates (40g)
+  * Banana (150g)
+  * Spinach (60g)
+  * Hemp seeds (20g)
+  * Plant milk (240ml)
+
+Lunch (1:00 PM) - 750 calories
+- Buddha bowl:
+  * Quinoa (90g dry)
+  * Black beans (150g cooked)
+  * Sweet potato (200g)
+  * Avocado (½ medium)
+  * Kale (100g)
+  * Tahini dressing (30g)
+
+Afternoon Snack (4:00 PM) - 400 calories
+- Fresh fruit (200g)
+- Raw nuts mix (50g)
+- Carrots (100g)
+- Hummus (60g)
+
+Dinner (7:00 PM) - 600 calories
+- Lentil and vegetable stir-fry:
+  * Red lentils (80g dry)
+  * Brown rice (70g dry)
+  * Mixed vegetables (250g)
+  * Olive oil (15ml)
+  * Nutritional yeast (10g)
+
+Total Daily Values:
+- Calories: ≈2,800
+- Protein: 120g
+- Complex carbs: 405g
+- Healthy fats: 78g
+
+Budget Considerations:
+- Buy seasonal produce
+- Purchase legumes and grains in bulk
+- Use frozen berries when fresh are expensive
+- Estimated daily cost: $12-15
+
+This plan provides complete proteins through combinations of legumes, grains, and seeds, while maintaining whole-food vegan requirements. All portions can be adjusted based on individual needs and response to training.</pre></td>
+                <td class="score-col"><span class="score score-high">10</span></td>
+                <td class="reasoning">The solution fully satisfies all mandatory requirements with detailed caloric total (2800), complete macro breakdown, and precise meal timing/portions. It adheres strictly to whole-food vegan guidelines with no processed items. Protein needs for muscle building are met through strategic combinations of plant proteins. Meal timing is optimized for training with pre/post workout nutrition.</td>
+            </tr>
+        
+            <tr>
+                <td>Test with a competitive swimmer preparing for a major competition, requiring high carbs and protein while staying within caloric goals for weight class</td>
+                <td class="prompt-inputs"><strong>height:</strong> 183<br><strong>weight:</strong> 82<br><strong>goal:</strong> Maintain weight while maximizing energy for Olympic swimming qualification meet in 2 days. Need 4500-5000 daily calories with 60% carbs, 25% protein.<br><strong>restrictions:</strong> No dairy, needs easily digestible foods</td>
+                <td class="criteria">• Includes 3 full meals plus snacks totaling 4500-5000 calories<br>• Maintains approximately 60% carbs, 25% protein macro ratio<br>• Avoids dairy and includes only easily digestible foods</td>
+                <td class="output"><pre>Let me create a meal plan following those steps:
+
+1. Daily Calories: 4800 calories (middle of 4500-5000 range)
+
+2. Macronutrient Breakdown:
+- Carbs (60%): 720g (2880 calories)
+- Protein (25%): 300g (1200 calories)
+- Fat (15%): 80g (720 calories)
+
+3. Meal Timing (Assuming morning training):
+- Pre-workout breakfast: 6:00 AM
+- Post-workout meal: 9:30 AM
+- Lunch: 1:00 PM
+- Afternoon snack: 4:00 PM
+- Dinner: 7:00 PM
+- Evening snack: 9:00 PM
+
+4 & 5. Detailed Meal Plan:
+
+Breakfast (6:00 AM) - 900 calories
+- Oatmeal (100g): 370 cal
+- Banana (2 medium): 210 cal
+- Honey (30g): 90 cal
+- Almond butter (30g): 180 cal
+- Rice milk (250ml): 50 cal
+
+Post-workout (9:30 AM) - 1000 calories
+- White rice (150g cooked): 195 cal
+- Grilled chicken breast (200g): 330 cal
+- Sweet potato (200g): 170 cal
+- Dates (100g): 282 cal
+- Coconut water (500ml): 23 cal
+
+Lunch (1:00 PM) - 1200 calories
+- Brown rice (200g cooked): 260 cal
+- Salmon (200g): 412 cal
+- Steamed vegetables (300g): 100 cal
+- Avocado (100g): 160 cal
+- Olive oil (15ml): 120 cal
+
+Afternoon Snack (4:00 PM) - 600 calories
+- Rice cakes (4 pieces): 140 cal
+- Almond butter (45g): 270 cal
+- Apple (2 medium): 190 cal
+
+Dinner (7:00 PM) - 800 calories
+- Quinoa (150g cooked): 180 cal
+- Lean turkey (200g): 320 cal
+- Roasted vegetables (300g): 150 cal
+- Olive oil (15ml): 120 cal
+
+Evening Snack (9:00 PM) - 300 calories
+- Rice milk smoothie with:
+  - Rice milk (300ml): 60 cal
+  - Banana (1 medium): 105 cal
+  - Plant-based protein powder (30g): 120 cal
+
+Total: 4800 calories
+
+Key Features:
+- No dairy products included
+- Easy-to-digest foods, especially closer to competition
+- Emphasis on complex carbs for sustained energy
+- Lean proteins spread throughout the day
+- Moderate fat content from healthy sources
+- Adequate hydration options
+
+Additional Notes:
+- Drink 3-4 liters of water throughout the day
+- All portions can be adjusted based on individual tolerance
+- Foods are simple and easily digestible for pre-competition
+- Consider consulting with sports nutritionist for fine-tuning</pre></td>
+                <td class="score-col"><span class="score score-high">10</span></td>
+                <td class="reasoning">Solution fully satisfies all mandatory requirements with detailed meal timing, exact portions, and calorie/macro breakdowns. Meals are dairy-free and easily digestible. The 4800 calorie total falls within the required 4500-5000 range with the specified 60% carbs, 25% protein ratio.</td>
+            </tr>
+        
+            <tr>
+                <td>Test with an aging marathon runner with diabetes who needs balanced blood sugar levels throughout training day</td>
+                <td class="prompt-inputs"><strong>height:</strong> 175<br><strong>weight:</strong> 68<br><strong>goal:</strong> Complete daily 15km training run while maintaining stable blood sugar levels for upcoming marathon<br><strong>restrictions:</strong> Type 2 diabetes requiring careful carbohydrate timing and monitoring, no artificial sweeteners</td>
+                <td class="criteria">• Includes 3-4 main meals and 2-3 snacks spread throughout the day<br>• Specifies meal timing relative to training run<br>• Incorporates low glycemic index carbohydrates<br>• Lists portion sizes for carbohydrate-containing foods</td>
+                <td class="output"><pre>I'll help create a meal plan following those steps:
+
+1. Daily Calorie Calculation:
+- Base metabolic rate (BMR): ~1,680 calories
+- Activity factor (high for marathon training): x1.7
+- Total daily needs: ~2,850 calories
+
+2. Macronutrient Distribution:
+- Protein: 20% (143g) = 570 calories
+- Fat: 25% (79g) = 710 calories
+- Carbs: 55% (390g) = 1,570 calories
+
+3. Meal Timing Plan:
+Pre-run (5:30 AM):
+- Light, easily digestible carbs + protein
+
+Post-run (7:30 AM):
+- Recovery meal with protein + complex carbs
+
+Main meals:
+- Breakfast (8:30 AM)
+- Lunch (12:30 PM)
+- Dinner (6:30 PM)
+
+Snacks:
+- Mid-morning (10:30 AM)
+- Afternoon (3:30 PM)
+
+4. Detailed Meal Plan:
+
+Pre-run (5:30 AM):
+- 1 banana (30g)
+- 1 tablespoon almond butter (15g)
+
+Post-run (7:30 AM):
+- Greek yogurt (170g)
+- Steel-cut oats (40g dry)
+- Berries (100g)
+
+Breakfast (8:30 AM):
+- 2 eggs (100g)
+- Whole grain toast (2 slices, 60g)
+- Avocado (50g)
+
+Mid-morning Snack (10:30 AM):
+- Apple (150g)
+- Mixed nuts (30g)
+
+Lunch (12:30 PM):
+- Quinoa (75g dry)
+- Grilled chicken breast (150g)
+- Mixed vegetables (200g)
+- Olive oil (15g)
+
+Afternoon Snack (3:30 PM):
+- Sweet potato (150g)
+- Turkey slices (50g)
+
+Dinner (6:30 PM):
+- Wild-caught salmon (180g)
+- Brown rice (60g dry)
+- Steamed broccoli (200g)
+- Olive oil (15g)
+
+5. Key Features:
+- Complex carbs timed around workout
+- Low glycemic index foods
+- High fiber content for blood sugar control
+- Lean proteins spread throughout day
+- Healthy fats for sustained energy
+- No artificial sweeteners
+- Regular meal timing for blood sugar stability
+
+6. Budget Considerations:
+- Seasonal produce to reduce costs
+- Bulk purchase of grains and nuts
+- Frozen vegetables as needed
+- Less expensive protein alternatives (eggs, legumes) for some meals
+
+Blood Sugar Monitoring Points:
+- Before morning run
+- 2 hours after breakfast
+- Before lunch
+- 2 hours after lunch
+- Before dinner
+- 2 hours after dinner
+
+This plan provides steady energy throughout the day while managing blood sugar levels for safe training. Adjust portions based on blood glucose readings and energy levels during training.</pre></td>
+                <td class="score-col"><span class="score score-high">10</span></td>
+                <td class="reasoning">The solution meets all mandatory requirements by providing daily calories (2,850), macro breakdown (20/25/55), and detailed meals with exact portions and timing. It also satisfies secondary criteria with 3 main meals + 3 snacks, clear workout timing, low GI carbs (quinoa, sweet potato, brown rice), and specific carb portions. While it includes some extraneous information, the core requirements are fully satisfied.</td>
+            </tr>
+        
+            </tbody>
+        </table>
+    </body>
+    </html>
+    

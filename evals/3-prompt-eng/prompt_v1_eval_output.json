@@ -1,0 +1,64 @@
+[
+  {
+    "output": "For a person with Type 2 diabetes training for a marathon, here's a suggested meal plan focused on supporting their 15km training runs while maintaining stable blood sugar:\n\nBefore Run (2-3 hours prior):\n- Steel-cut oats with cinnamon (low glycemic index carbs)\n- 1-2 tablespoons of nut butter for sustained energy\n- Small apple or berries for natural sugars\n- Protein source like egg whites\n\nDuring Run:\n- Natural energy sources like banana or dates (test during training)\n- Water with electrolytes (no artificial sweeteners)\n\nPost Run:\n- Lean protein (chicken, fish, or tofu) for muscle recovery\n- Complex carbohydrates like sweet potato or quinoa\n- Green vegetables for nutrients\n- Healthy fats (avocado, olive oil)\n\nThroughout Day:\n- Small, frequent meals to maintain blood sugar\n- High-fiber foods (legumes, vegetables)\n- Lean proteins\n- Healthy fats\n- Whole grains in moderated portions\n\nKey Considerations:\n- Monitor blood glucose before, during, and after runs\n- Time carbohydrates carefully around exercise\n- Work with healthcare provider to adjust medication if needed\n- Stay well-hydrated\n- Keep a food/blood sugar log to identify optimal timing and portions",
+    "test_case": {
+      "prompt_inputs": {
+        "height": "175",
+        "weight": "68",
+        "goal": "Complete daily 15km training run while maintaining stable blood sugar levels for upcoming marathon",
+        "restrictions": "Type 2 diabetes requiring careful carbohydrate timing and monitoring, no artificial sweeteners"
+      },
+      "solution_criteria": [
+        "Includes 3-4 main meals and 2-3 snacks spread throughout the day",
+        "Specifies meal timing relative to training run",
+        "Incorporates low glycemic index carbohydrates",
+        "Lists portion sizes for carbohydrate-containing foods"
+      ],
+      "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+      "scenario": "Test with an aging marathon runner with diabetes who needs balanced blood sugar levels throughout training day"
+    },
+    "score": 3,
+    "reasoning": "While the solution provides good general guidance for a diabetic athlete, it fails multiple mandatory requirements - no daily caloric total is specified, macro-nutrient ratios are missing, and most foods lack exact portion sizes. The meal timing guidance is general rather than specific. These are critical violations of the mandatory criteria."
+  },
+  {
+    "output": "Here's a pre-competition meal plan focused on easily digestible, dairy-free foods that meet your caloric and macro needs:\n\nBreakfast (1000-1200 calories):\n- 2 cups of oatmeal with honey\n- 2 bananas\n- 4 tbsp almond butter\n- 1 cup mixed berries\n- Toast with jam\n- Orange juice\n\nMid-Morning (500 calories):\n- Rice cakes with honey\n- Dried fruits (dates, raisins)\n- Sports drink\n\nLunch (1200 calories):\n- Large portion of white rice\n- Grilled lean chicken breast\n- Steamed vegetables\n- Avocado\n- Sports drink\n\nPre-Training Snack (500 calories):\n- White bread with jam\n- Energy gel or sports chews\n- Banana\n\nDinner (1200 calories):\n- Lean fish or chicken\n- Sweet potato or pasta\n- Steamed vegetables\n- Olive oil\n- White rice\n\nEvening Snack (400 calories):\n- Rice cakes\n- Honey\n- Banana\n\nKey points:\n- Focus on easily digestible carbs\n- Avoid new foods before competition\n- Stay well hydrated\n- Eat familiar foods\n- Time meals 2-4 hours before training/competition",
+    "test_case": {
+      "prompt_inputs": {
+        "height": "183",
+        "weight": "82",
+        "goal": "Maintain weight while maximizing energy for Olympic swimming qualification meet in 2 days. Need 4500-5000 daily calories with 60% carbs, 25% protein.",
+        "restrictions": "No dairy, needs easily digestible foods"
+      },
+      "solution_criteria": [
+        "Includes 3 full meals plus snacks totaling 4500-5000 calories",
+        "Maintains approximately 60% carbs, 25% protein macro ratio",
+        "Avoids dairy and includes only easily digestible foods"
+      ],
+      "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+      "scenario": "Test with a competitive swimmer preparing for a major competition, requiring high carbs and protein while staying within caloric goals for weight class"
+    },
+    "score": 3,
+    "reasoning": "While the meal plan includes appropriate foods and meal timing for an athlete, it fails to meet mandatory requirements of providing total daily calories and macro-nutrient breakdown. Portion sizes are vague for many items, making it impossible to verify if caloric and macro targets are met. Due to these missing mandatory elements, the solution cannot score above a 3."
+  },
+  {
+    "output": "For a 178cm, 75kg person looking to build muscle mass through CrossFit on a whole-food vegan diet, here's a nutrition plan:\n\nDaily Caloric Needs:\n- Base needs plus exercise would require approximately 2,800-3,000 calories for muscle gain\n\nKey Nutrients to Focus On:\n- Protein: 120-150g daily\n- Complex carbohydrates: 350-400g\n- Healthy fats: 65-80g\n\nRecommended Foods:\n\nProtein Sources:\n- Lentils\n- Chickpeas\n- Black beans\n- Quinoa\n- Tempeh\n- Edamame\n- Hemp seeds\n- Chia seeds\n\nCarbohydrate Sources:\n- Sweet potatoes\n- Brown rice\n- Oats\n- Bananas\n- Dates\n- Winter squash\n- Whole grain bread\n\nHealthy Fats:\n- Avocados\n- Nuts (almonds, walnuts)\n- Seeds (pumpkin, sunflower)\n- Olive oil\n- Coconut\n\nMeal Timing:\n1. Pre-workout: Complex carbs + protein (oatmeal with nuts and fruit)\n2. Post-workout: Quick-digesting carbs + protein (banana + lentils)\n3. 4-5 smaller meals throughout the day\n\nSample Meal Plan:\n\nBreakfast:\n- Large bowl of oatmeal with chia seeds\n- Mixed berries\n- Banana\n- Almond butter\n\nLunch:\n- Quinoa bowl\n- Black beans\n- Roasted sweet potatoes\n- Avocado\n- Steamed greens\n\nPre-workout Snack:\n- Apple with almond butter\n- Handful of dates\n\nPost-workout:\n- Lentil and vegetable stir-fry\n- Brown rice\n- Hemp seeds\n\nDinner:\n- Tempeh\n- Roasted vegetables\n- Brown rice\n- Tahini sauce\n\nEvening Snack:\n- Mixed nuts and seeds\n- Fresh fruit\n\nRemember to:\n- Stay well hydrated\n- Eat varied colors of vegetables\n- Combine protein sources for complete amino acids\n- Plan meals ahead\n- Listen to your body and adjust portions as needed",
+    "test_case": {
+      "prompt_inputs": {
+        "height": "178",
+        "weight": "75",
+        "goal": "Build muscle mass through crossfit training while following a whole-food vegan diet",
+        "restrictions": "Vegan, no processed foods, no supplements"
+      },
+      "solution_criteria": [
+        "Includes 3 full meals for one day",
+        "All foods are whole-food vegan (no processed items)",
+        "Provides adequate protein sources for muscle building",
+        "Meals are properly timed around training"
+      ],
+      "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+      "scenario": "Test with a vegan crossfit athlete looking to build muscle mass while avoiding processed foods and supplements"
+    },
+    "score": 3,
+    "reasoning": "While the solution provides a good framework with appropriate foods and meal timing principles, it fails to meet the mandatory requirement of exact portions and precise caloric counts per meal. It includes daily caloric and macro targets but not at the individual meal level. This violation of a mandatory requirement necessitates a low score despite other positive elements."
+  }
+]

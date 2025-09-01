@@ -1,0 +1,64 @@
+[
+  {
+    "output": "Here's a diabetes-friendly meal plan designed to support your marathon training while maintaining stable blood sugar levels:\n\nPre-Run Breakfast (1-2 hours before running)\n- 1 cup steel-cut oats (slow-releasing carbs)\n- 1 small banana (potassium for muscle function)\n- 1 tablespoon chia seeds\n- 1/2 cup Greek yogurt (protein)\n- Cinnamon (helps with blood sugar control)\n- Water (500ml)\n\nDuring Run\n- Water with electrolytes (no added sugar)\n- Natural energy dates (2-3 pieces as needed)\n\nPost-Run Recovery (within 30 minutes)\n- 2 eggs with whole grain toast\n- 1 cup berries\n- Water (500ml)\n\nLunch\n- Grilled chicken breast (150g)\n- Quinoa (1/2 cup)\n- Mixed vegetables (broccoli, carrots, peppers)\n- Olive oil dressing\n- Water (500ml)\n\nAfternoon Snack\n- Apple with almond butter\n- Small handful of walnuts\n\nDinner\n- Baked salmon (150g)\n- Sweet potato (small)\n- Green leafy vegetables\n- Avocado slices\n- Water (500ml)\n\nEvening Snack\n- Cottage cheese with peach slices\n\nTips:\n- Monitor blood sugar before, during, and after running\n- Adjust portions based on blood sugar readings\n- Stay hydrated throughout the day\n- Space meals 2-3 hours apart\n- Keep a fast-acting carb source handy for emergencies",
+    "test_case": {
+      "prompt_inputs": {
+        "height": "175",
+        "weight": "68",
+        "goal": "Complete daily 15km training run while maintaining stable blood sugar levels for upcoming marathon",
+        "restrictions": "Type 2 diabetes requiring careful carbohydrate timing and monitoring, no artificial sweeteners"
+      },
+      "solution_criteria": [
+        "Includes 3-4 main meals and 2-3 snacks spread throughout the day",
+        "Specifies meal timing relative to training run",
+        "Incorporates low glycemic index carbohydrates",
+        "Lists portion sizes for carbohydrate-containing foods"
+      ],
+      "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+      "scenario": "Test with an aging marathon runner with diabetes who needs balanced blood sugar levels throughout training day"
+    },
+    "score": 3,
+    "reasoning": "While the solution provides a thoughtful meal plan with good timing and diabetes considerations, it fails to meet mandatory requirements of including daily caloric total and macro-nutrient breakdown. The missing of these key mandatory elements requires a low score despite other positive aspects."
+  },
+  {
+    "output": "Here's a one-day meal plan (approximately 4800 calories) designed for your pre-competition needs:\n\nBREAKFAST (6:00 AM) - 1100 calories\n- 2 cups cooked oatmeal with honey\n- 2 bananas\n- 1 tablespoon almond butter\n- 2 slices whole grain toast\n- Mixed berries (1 cup)\n- Coconut water\n\nMID-MORNING SNACK (9:00 AM) - 450 calories\n- Rice cakes (3)\n- Date and fig energy balls (4)\n- Green apple\n\nLUNCH (12:00 PM) - 1200 calories\n- 2 cups white rice\n- 6 oz grilled chicken breast\n- Steamed vegetables (carrots, zucchini)\n- Avocado (\u00bd)\n- Olive oil drizzle\n- Sweet potato (1 medium)\n\nPRE-TRAINING SNACK (3:00 PM) - 500 calories\n- White bread with honey\n- Rice crackers\n- Dried mango slices\n\nPOST-TRAINING SNACK (5:30 PM) - 550 calories\n- Plant-based protein shake with banana and dates\n- Rice cakes with almond butter\n\nDINNER (7:30 PM) - 1000 calories\n- 8 oz grilled salmon\n- 2 cups pasta with olive oil\n- Steamed asparagus\n- Roasted butternut squash\n\nMacronutrient Breakdown:\n- Carbs: 60% (720g)\n- Protein: 25% (300g)\n- Fats: 15% (80g)\n\nTips:\n- Stick to familiar foods\n- Stay well hydrated throughout the day\n- Avoid new foods close to competition\n- All portions can be adjusted based on comfort and hunger levels",
+    "test_case": {
+      "prompt_inputs": {
+        "height": "183",
+        "weight": "82",
+        "goal": "Maintain weight while maximizing energy for Olympic swimming qualification meet in 2 days. Need 4500-5000 daily calories with 60% carbs, 25% protein.",
+        "restrictions": "No dairy, needs easily digestible foods"
+      },
+      "solution_criteria": [
+        "Includes 3 full meals plus snacks totaling 4500-5000 calories",
+        "Maintains approximately 60% carbs, 25% protein macro ratio",
+        "Avoids dairy and includes only easily digestible foods"
+      ],
+      "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+      "scenario": "Test with a competitive swimmer preparing for a major competition, requiring high carbs and protein while staying within caloric goals for weight class"
+    },
+    "score": 9,
+    "reasoning": "Solution meets all mandatory requirements by providing exact caloric total, macro breakdown, and timed meals with specific foods. The meal plan successfully avoids dairy while emphasizing easily digestible carb sources appropriate for pre-competition. Portions and timing are generally well-specified."
+  },
+  {
+    "output": "Here's a whole-food vegan meal plan designed for a crossfit athlete focusing on muscle gain:\n\nBREAKFAST (7:00 AM) - Pre-workout\n- 1 cup steel-cut oats\n- 2 tablespoons chia seeds\n- 1 banana\n- 1 cup mixed berries\n- 2 tablespoons almond butter\n- Handful of walnuts\nCalories: ~650, Protein: 20g\n\nPOST-WORKOUT SNACK (9:30 AM)\n- Smoothie made with:\n  * 2 dates\n  * 1 cup spinach\n  * 1 cup plant-based milk (oat/almond)\n  * 1 apple\n  * \u00bd cup rolled oats\nCalories: ~300, Protein: 8g\n\nLUNCH (12:30 PM)\n- Quinoa Buddha Bowl:\n  * 1.5 cups cooked quinoa\n  * 1 cup black beans\n  * 1 cup roasted chickpeas\n  * 2 cups mixed vegetables (broccoli, sweet potato, kale)\n  * \u00bc avocado\n  * Lemon-tahini dressing\nCalories: ~700, Protein: 30g\n\nAFTERNOON SNACK (3:30 PM)\n- Trail mix:\n  * Raw almonds\n  * Pumpkin seeds\n  * Dried figs\n  * 1 apple\nCalories: ~350, Protein: 12g\n\nDINNER (7:00 PM)\n- Lentil and vegetable stir-fry:\n  * 1.5 cups cooked red lentils\n  * 2 cups mixed vegetables\n  * Brown rice (1 cup cooked)\n  * Ginger-garlic sauce\n- Side salad with hemp seeds\nCalories: ~750, Protein: 35g\n\nEVENING SNACK (9:00 PM)\n- 1 cup soy yogurt (unsweetened)\n- Mixed nuts (handful)\n- 1 tablespoon pumpkin seeds\nCalories: ~250, Protein: 15g\n\nDaily Totals:\n- Calories: ~3000\n- Protein: ~120g\n- Complex carbs: High\n- Healthy fats: Moderate\n\nKey features:\n- High in plant-based protein sources\n- Rich in complex carbohydrates for energy\n- Includes healthy fats for hormone production\n- High in fiber\n- Rich in micronutrients\n- Timed nutrition around workout\n- Emphasis on whole foods\n\nRemember to:\n- Drink plenty of water throughout the day (3-4 liters)\n- Adjust portions based on hunger and activity level\n- Listen to your body and adjust accordingly",
+    "test_case": {
+      "prompt_inputs": {
+        "height": "178",
+        "weight": "75",
+        "goal": "Build muscle mass through crossfit training while following a whole-food vegan diet",
+        "restrictions": "Vegan, no processed foods, no supplements"
+      },
+      "solution_criteria": [
+        "Includes 3 full meals for one day",
+        "All foods are whole-food vegan (no processed items)",
+        "Provides adequate protein sources for muscle building",
+        "Meals are properly timed around training"
+      ],
+      "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+      "scenario": "Test with a vegan crossfit athlete looking to build muscle mass while avoiding processed foods and supplements"
+    },
+    "score": 10,
+    "reasoning": "The solution fully satisfies all mandatory requirements with detailed caloric totals, macro breakdowns, and precise meal timing/portions. It provides adequate vegan protein (~120g) through whole food sources like legumes, nuts and seeds. Meals are properly timed around the morning workout with pre/post nutrition. All foods listed are unprocessed vegan options."
+  }
+]

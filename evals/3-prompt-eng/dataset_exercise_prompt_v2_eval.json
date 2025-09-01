@@ -1,0 +1,68 @@
+[
+  {
+    "output": "[\"avant-garde cinema\", \"1920s Paris\", \"modernist aesthetics\", \"social transformation\", \"Surrealist movements\", \"industrialization\", \"experimental film\", \"class hierarchies\", \"linear narrative\", \"urban experience\", \"abstract imagery\", \"music hall traditions\", \"gallery practices\", \"cultural boundaries\"]",
+    "test_case": {
+      "prompt_inputs": {
+        "content": "The emergence of avant-garde cinema in 1920s Paris represents a complex intersection of modernist aesthetics and social transformation. Drawing on Surrealist artistic movements while reflecting broader cultural anxieties about industrialization, these experimental films challenged traditional class hierarchies through their radical formal techniques. The films' disruption of linear narrative mirrored contemporaneous sociological theories about the fragmentation of urban experience, while their integration of abstract imagery drew from both working-class music hall traditions and elite gallery practices, effectively blurring established cultural boundaries."
+      },
+      "solution_criteria": [
+        "Identifies distinct academic domains/fields mentioned in the text",
+        "Captures both broad themes and specific concepts",
+        "Includes overlapping interdisciplinary topics"
+      ],
+      "task_description": "\"\n    Extract topics out of a passage of text from a scholarly article into a JSON array of strings\"\n    ",
+      "scenario": "Extract topics from a highly interdisciplinary humanities passage that combines concepts from sociology, art history, and cultural studies to test handling of overlapping domains"
+    },
+    "score": 9,
+    "reasoning": "The solution meets all mandatory requirements by providing a clean JSON array of topic strings. It successfully captures the key academic domains, themes and concepts from the text while maintaining appropriate granularity. The topics effectively represent the interdisciplinary nature of the content."
+  },
+  {
+    "output": "[\"climate change communication\", \"public attitudes\", \"media coverage\", \"extreme weather events\", \"climate awareness\", \"social media\", \"environmental messaging\", \"psychological barriers\", \"scientific literacy\"]",
+    "test_case": {
+      "prompt_inputs": {
+        "content": "Recent studies on climate change communication (Smith & Jones, 2021) have revealed shifting public attitudes. As noted by Wilson (2020), \"media coverage of extreme weather events has significantly increased climate awareness among urban populations\" (p. 45). The intersection of social media discourse and traditional news reporting has created new pathways for environmental messaging, while psychological barriers to climate action persist despite improved scientific literacy (Brown et al., 2022)."
+      },
+      "solution_criteria": [
+        "Correctly identifies core topics without including citations",
+        "Extracts topics from quoted text appropriately",
+        "Topics reflect key concepts rather than academic formatting elements"
+      ],
+      "task_description": "\"\n    Extract topics out of a passage of text from a scholarly article into a JSON array of strings\"\n    ",
+      "scenario": "Extract topics from a passage with quoted text and parenthetical citations to test handling of non-topical academic formatting elements"
+    },
+    "score": 9,
+    "reasoning": "The solution meets all mandatory requirements by providing a clean JSON array of topic strings. It successfully extracts meaningful topics while avoiding citations and academic formatting elements. The topics accurately represent the key concepts discussed in the passage. While some minor optimization could be done in terms of topic granularity and organization, these are not part of the core requirements."
+  },
+  {
+    "output": "[\"microplastic pollution\", \"marine ecosystems\", \"water sampling\", \"coastal regions\", \"filter-feeding organisms\", \"biodiversity\", \"biomagnification\", \"food chain\", \"environmental pollution\"]",
+    "test_case": {
+      "prompt_inputs": {
+        "content": "This study examines the impact of microplastic pollution on marine ecosystems. Our methodology involved collecting water samples from three coastal regions over a 12-month period. The findings indicate significant accumulation of plastic particles in filter-feeding organisms. We conclude that microplastic concentrations correlate strongly with decreased biodiversity in affected areas. Furthermore, the research suggests potential biomagnification of these pollutants through the food chain."
+      },
+      "solution_criteria": [
+        "Correctly identifies core topics while excluding academic language markers",
+        "Includes all distinct environmental/scientific concepts mentioned"
+      ],
+      "task_description": "\"\n    Extract topics out of a passage of text from a scholarly article into a JSON array of strings\"\n    ",
+      "scenario": "Extract topics from a short technical passage containing common academic keywords/phrases (e.g. 'methodology', 'findings indicate', 'we conclude') to test filtering of academic language vs true topics"
+    },
+    "score": 9,
+    "reasoning": "The solution meets all mandatory requirements by providing a clean JSON array of topic strings. It effectively captures the key scientific concepts discussed in the passage including microplastics, marine ecosystems, sampling methodology, and biological impacts. The only minor issue is the inclusion of 'environmental pollution' which, while thematically related, is not directly mentioned in the source text."
+  },
+  {
+    "output": "[\"Communication Patterns\", \"Work-Life Balance\", \"Organizational Outcomes\", \"Remote Work Productivity\", \"Employee Retention\", \"Office Space Costs\", \"Asynchronous Communication\", \"Workday Length\", \"Lifestyle Flexibility\"]",
+    "test_case": {
+      "prompt_inputs": {
+        "content": "Key findings from our meta-analysis of remote work productivity studies:\n\n1. Communication Patterns\n\u2022 73% increase in asynchronous messaging\n\u2022 42% decrease in spontaneous interactions\n\n2. Work-Life Balance\n\u2022 Average workday extended by 48.5 minutes\n\u2022 67% report improved lifestyle flexibility\n\n3. Organizational Outcomes\n\u2022 22% reduction in office space costs\n\u2022 12% increase in employee retention rates\n\nBullet points under each section represent statistically significant findings (p<0.05) across reviewed studies."
+      },
+      "solution_criteria": [
+        "Extracts high-level section topics (e.g., Communication Patterns, Work-Life Balance, Organizational Outcomes)",
+        "Preserves hierarchical structure of topics from numbered lists"
+      ],
+      "task_description": "\"\n    Extract topics out of a passage of text from a scholarly article into a JSON array of strings\"\n    ",
+      "scenario": "Extract topics from a passage containing numbered lists and bullet points of research findings to test parsing of structured academic content"
+    },
+    "score": 7,
+    "reasoning": "The solution meets the mandatory JSON formatting requirements and captures both high-level section topics and key subtopics. However, it adds some inferred topics not explicitly present in the text's structure and flattens the hierarchical organization. Since these are secondary criteria issues rather than mandatory requirement violations, a good but not perfect score is warranted."
+  }
+]

@@ -1,0 +1,48 @@
+[
+  {
+    "prompt_inputs": {
+      "content": "The emergence of avant-garde cinema in 1920s Paris represents a complex intersection of modernist aesthetics and social transformation. Drawing on Surrealist artistic movements while reflecting broader cultural anxieties about industrialization, these experimental films challenged traditional class hierarchies through their radical formal techniques. The films' disruption of linear narrative mirrored contemporaneous sociological theories about the fragmentation of urban experience, while their integration of abstract imagery drew from both working-class music hall traditions and elite gallery practices, effectively blurring established cultural boundaries."
+    },
+    "solution_criteria": [
+      "Identifies distinct academic domains/fields mentioned in the text",
+      "Captures both broad themes and specific concepts",
+      "Includes overlapping interdisciplinary topics"
+    ],
+    "task_description": "\"\n    Extract topics out of a passage of text from a scholarly article into a JSON array of strings\"\n    ",
+    "scenario": "Extract topics from a highly interdisciplinary humanities passage that combines concepts from sociology, art history, and cultural studies to test handling of overlapping domains"
+  },
+  {
+    "prompt_inputs": {
+      "content": "Recent studies on climate change communication (Smith & Jones, 2021) have revealed shifting public attitudes. As noted by Wilson (2020), \"media coverage of extreme weather events has significantly increased climate awareness among urban populations\" (p. 45). The intersection of social media discourse and traditional news reporting has created new pathways for environmental messaging, while psychological barriers to climate action persist despite improved scientific literacy (Brown et al., 2022)."
+    },
+    "solution_criteria": [
+      "Correctly identifies core topics without including citations",
+      "Extracts topics from quoted text appropriately",
+      "Topics reflect key concepts rather than academic formatting elements"
+    ],
+    "task_description": "\"\n    Extract topics out of a passage of text from a scholarly article into a JSON array of strings\"\n    ",
+    "scenario": "Extract topics from a passage with quoted text and parenthetical citations to test handling of non-topical academic formatting elements"
+  },
+  {
+    "prompt_inputs": {
+      "content": "Key findings from our meta-analysis of remote work productivity studies:\n\n1. Communication Patterns\n\u2022 73% increase in asynchronous messaging\n\u2022 42% decrease in spontaneous interactions\n\n2. Work-Life Balance\n\u2022 Average workday extended by 48.5 minutes\n\u2022 67% report improved lifestyle flexibility\n\n3. Organizational Outcomes\n\u2022 22% reduction in office space costs\n\u2022 12% increase in employee retention rates\n\nBullet points under each section represent statistically significant findings (p<0.05) across reviewed studies."
+    },
+    "solution_criteria": [
+      "Extracts high-level section topics (e.g., Communication Patterns, Work-Life Balance, Organizational Outcomes)",
+      "Preserves hierarchical structure of topics from numbered lists"
+    ],
+    "task_description": "\"\n    Extract topics out of a passage of text from a scholarly article into a JSON array of strings\"\n    ",
+    "scenario": "Extract topics from a passage containing numbered lists and bullet points of research findings to test parsing of structured academic content"
+  },
+  {
+    "prompt_inputs": {
+      "content": "This study examines the impact of microplastic pollution on marine ecosystems. Our methodology involved collecting water samples from three coastal regions over a 12-month period. The findings indicate significant accumulation of plastic particles in filter-feeding organisms. We conclude that microplastic concentrations correlate strongly with decreased biodiversity in affected areas. Furthermore, the research suggests potential biomagnification of these pollutants through the food chain."
+    },
+    "solution_criteria": [
+      "Correctly identifies core topics while excluding academic language markers",
+      "Includes all distinct environmental/scientific concepts mentioned"
+    ],
+    "task_description": "\"\n    Extract topics out of a passage of text from a scholarly article into a JSON array of strings\"\n    ",
+    "scenario": "Extract topics from a short technical passage containing common academic keywords/phrases (e.g. 'methodology', 'findings indicate', 'we conclude') to test filtering of academic language vs true topics"
+  }
+]

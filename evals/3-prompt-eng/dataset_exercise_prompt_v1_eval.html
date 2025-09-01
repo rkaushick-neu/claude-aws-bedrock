@@ -1,0 +1,256 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Prompt Evaluation Report</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 20px;
+                color: #333;
+            }
+            .header {
+                background-color: #f0f0f0;
+                padding: 20px;
+                border-radius: 5px;
+                margin-bottom: 20px;
+            }
+            .summary-stats {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .stat-box {
+                background-color: #fff;
+                border-radius: 5px;
+                padding: 15px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                flex-basis: 30%;
+                min-width: 200px;
+            }
+            .stat-value {
+                font-size: 24px;
+                font-weight: bold;
+                margin-top: 5px;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+            th {
+                background-color: #4a4a4a;
+                color: white;
+                text-align: left;
+                padding: 12px;
+            }
+            td {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+                vertical-align: top;
+            }
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            .output-cell {
+                white-space: pre-wrap;
+            }
+            .score {
+                font-weight: bold;
+                padding: 5px 10px;
+                border-radius: 3px;
+                display: inline-block;
+            }
+            .score-high {
+                background-color: #c8e6c9;
+                color: #2e7d32;
+            }
+            .score-medium {
+                background-color: #fff9c4;
+                color: #f57f17;
+            }
+            .score-low {
+                background-color: #ffcdd2;
+                color: #c62828;
+            }
+            .output {
+                overflow: auto;
+                white-space: pre-wrap;
+            }
+
+            .output pre {
+                background-color: #f5f5f5;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                padding: 10px;
+                margin: 0;
+                font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+                font-size: 14px;
+                line-height: 1.4;
+                color: #333;
+                box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+                overflow-x: auto;
+                white-space: pre-wrap; 
+                word-wrap: break-word; 
+            }
+
+            td {
+                width: 20%;
+            }
+            .score-col {
+                width: 80px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Prompt Evaluation Report</h1>
+            <div class="summary-stats">
+                <div class="stat-box">
+                    <div>Total Test Cases</div>
+                    <div class="stat-value">4</div>
+                </div>
+                <div class="stat-box">
+                    <div>Average Score</div>
+                    <div class="stat-value">2.0 / 10</div>
+                </div>
+                <div class="stat-box">
+                    <div>Pass Rate (≥7)</div>
+                    <div class="stat-value">0.0%</div>
+                </div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Scenario</th>
+                    <th>Prompt Inputs</th>
+                    <th>Solution Criteria</th>
+                    <th>Output</th>
+                    <th>Score</th>
+                    <th>Reasoning</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+            <tr>
+                <td>Extract topics from a highly interdisciplinary humanities passage that combines concepts from sociology, art history, and cultural studies to test handling of overlapping domains</td>
+                <td class="prompt-inputs"><strong>content:</strong> The emergence of avant-garde cinema in 1920s Paris represents a complex intersection of modernist aesthetics and social transformation. Drawing on Surrealist artistic movements while reflecting broader cultural anxieties about industrialization, these experimental films challenged traditional class hierarchies through their radical formal techniques. The films' disruption of linear narrative mirrored contemporaneous sociological theories about the fragmentation of urban experience, while their integration of abstract imagery drew from both working-class music hall traditions and elite gallery practices, effectively blurring established cultural boundaries.</td>
+                <td class="criteria">• Identifies distinct academic domains/fields mentioned in the text<br>• Captures both broad themes and specific concepts<br>• Includes overlapping interdisciplinary topics</td>
+                <td class="output"><pre>This text primarily covers several interrelated topics:
+
+1. Film History/Cinema
+- Specifically avant-garde cinema in 1920s Paris
+- Experimental film techniques
+
+2. Art Movements
+- Surrealism
+- Modernist aesthetics
+
+3. Social/Cultural History
+- Class hierarchies and their disruption
+- Cultural transformation
+- Urban experience
+
+4. Cultural Theory
+- Sociological theories
+- Narrative structure
+- Cultural boundaries between elite and working-class art
+
+The passage examines how these topics intersect, particularly looking at how avant-garde cinema reflected and influenced both artistic and social developments in 1920s Paris.</pre></td>
+                <td class="score-col"><span class="score score-low">2</span></td>
+                <td class="reasoning">While the solution demonstrates strong topic identification and analysis, it completely fails to meet the core requirement of providing a simple JSON array of topic strings. The inclusion of explanatory text and hierarchical organization, while potentially useful, violates the mandatory format requirements.</td>
+            </tr>
+        
+            <tr>
+                <td>Extract topics from a passage with quoted text and parenthetical citations to test handling of non-topical academic formatting elements</td>
+                <td class="prompt-inputs"><strong>content:</strong> Recent studies on climate change communication (Smith & Jones, 2021) have revealed shifting public attitudes. As noted by Wilson (2020), "media coverage of extreme weather events has significantly increased climate awareness among urban populations" (p. 45). The intersection of social media discourse and traditional news reporting has created new pathways for environmental messaging, while psychological barriers to climate action persist despite improved scientific literacy (Brown et al., 2022).</td>
+                <td class="criteria">• Correctly identifies core topics without including citations<br>• Extracts topics from quoted text appropriately<br>• Topics reflect key concepts rather than academic formatting elements</td>
+                <td class="output"><pre>This text contains several interrelated topics:
+
+1. Climate Change Communication
+- How climate change information is conveyed to the public
+- Effectiveness of different communication methods
+
+2. Public Attitudes & Awareness
+- Changing public perceptions of climate change
+- Public response to climate information
+
+3. Media Coverage
+- Role of traditional news media
+- Impact of extreme weather event reporting
+- Social media's influence
+
+4. Psychological Aspects
+- Psychological barriers to climate action
+- Public response to environmental messaging
+
+5. Scientific Literacy
+- Public understanding of climate science
+- Relationship between knowledge and action
+
+The text primarily focuses on how climate change information is communicated and received by the public, bringing together elements of media studies, psychology, and public opinion research.</pre></td>
+                <td class="score-col"><span class="score score-low">2</span></td>
+                <td class="reasoning">While the solution shows good analysis of the content, it completely fails to meet the core requirement of providing a simple JSON array of topic strings. The response is formatted as prose with categories and bullet points instead of the required JSON format. This violation of a mandatory requirement means the solution must receive a failing score.</td>
+            </tr>
+        
+            <tr>
+                <td>Extract topics from a passage containing numbered lists and bullet points of research findings to test parsing of structured academic content</td>
+                <td class="prompt-inputs"><strong>content:</strong> Key findings from our meta-analysis of remote work productivity studies:
+
+1. Communication Patterns
+• 73% increase in asynchronous messaging
+• 42% decrease in spontaneous interactions
+
+2. Work-Life Balance
+• Average workday extended by 48.5 minutes
+• 67% report improved lifestyle flexibility
+
+3. Organizational Outcomes
+• 22% reduction in office space costs
+• 12% increase in employee retention rates
+
+Bullet points under each section represent statistically significant findings (p<0.05) across reviewed studies.</td>
+                <td class="criteria">• Extracts high-level section topics (e.g., Communication Patterns, Work-Life Balance, Organizational Outcomes)<br>• Preserves hierarchical structure of topics from numbered lists</td>
+                <td class="output"><pre>This text contains three main topics related to remote work research:
+
+1. Communication Patterns - How people communicate when working remotely
+2. Work-Life Balance - The impact of remote work on people's daily schedules and flexibility
+3. Organizational Outcomes - Business-level effects of remote work
+
+Each topic includes data points from what appears to be a meta-analysis (a study of multiple studies) with statistically significant findings.</pre></td>
+                <td class="score-col"><span class="score score-low">2</span></td>
+                <td class="reasoning">While the solution accurately extracts the core topics, it completely fails to meet the mandatory requirement of outputting them as a JSON array of strings. Instead, it provides a prose explanation with commentary. Any violation of mandatory requirements results in automatic failure.</td>
+            </tr>
+        
+            <tr>
+                <td>Extract topics from a short technical passage containing common academic keywords/phrases (e.g. 'methodology', 'findings indicate', 'we conclude') to test filtering of academic language vs true topics</td>
+                <td class="prompt-inputs"><strong>content:</strong> This study examines the impact of microplastic pollution on marine ecosystems. Our methodology involved collecting water samples from three coastal regions over a 12-month period. The findings indicate significant accumulation of plastic particles in filter-feeding organisms. We conclude that microplastic concentrations correlate strongly with decreased biodiversity in affected areas. Furthermore, the research suggests potential biomagnification of these pollutants through the food chain.</td>
+                <td class="criteria">• Correctly identifies core topics while excluding academic language markers<br>• Includes all distinct environmental/scientific concepts mentioned</td>
+                <td class="output"><pre>This text covers several key topics related to environmental science and marine biology:
+
+1. Microplastic pollution
+2. Marine ecosystems
+3. Environmental sampling/monitoring
+4. Marine organisms (specifically filter-feeders)
+5. Biodiversity impacts
+6. Biomagnification (movement of pollutants through food chains)
+7. Environmental research methodology
+8. Coastal ecosystems
+
+The main focus appears to be on microplastic pollution and its environmental impacts in marine settings.</pre></td>
+                <td class="score-col"><span class="score score-low">2</span></td>
+                <td class="reasoning">The solution completely fails to meet the core mandatory requirement of providing a JSON array of strings. While the topic identification is accurate, the format is a numbered list with commentary rather than the required JSON array structure. Any violation of mandatory requirements results in a failing score.</td>
+            </tr>
+        
+            </tbody>
+        </table>
+    </body>
+    </html>
+    

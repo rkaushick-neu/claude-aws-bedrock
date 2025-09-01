@@ -1,0 +1,64 @@
+[
+  {
+    "output": "Let me create a meal plan following those steps:\n\n1. Calorie Calculation:\n- Base metabolic rate (BMR) \u2248 1,700 calories\n- With high activity + muscle building goal \u2248 2,800 calories total\n\n2. Macronutrient Split:\n- Protein: 120g (20%) \u2248 480 calories\n- Fat: 78g (25%) \u2248 700 calories\n- Carbs: 405g (55%) \u2248 1,620 calories\n\n3. Meal Timing (assuming morning workout):\n- Pre-workout breakfast: 6:30 AM\n- Post-workout meal: 9:30 AM\n- Lunch: 1:00 PM\n- Snack: 4:00 PM\n- Dinner: 7:00 PM\n\n4. Meal Plan:\n\nBreakfast (6:30 AM) - 600 calories\n- Oatmeal bowl:\n  * 100g rolled oats\n  * 30g chia seeds\n  * 2 bananas\n  * 40g almond butter\n  * Cinnamon to taste\n\nPost-workout (9:30 AM) - 500 calories\n- Smoothie:\n  * 200g mixed berries\n  * 2 dates\n  * 100g spinach\n  * 50g hemp seeds\n  * 1 cup coconut water\n\nLunch (1:00 PM) - 800 calories\n- Buddha bowl:\n  * 150g quinoa (cooked)\n  * 200g sweet potato\n  * 150g chickpeas\n  * 100g mixed vegetables\n  * 50g avocado\n  * Lemon-tahini dressing (2 tbsp)\n\nSnack (4:00 PM) - 300 calories\n- 60g mixed nuts (almonds, walnuts)\n- 1 apple\n\nDinner (7:00 PM) - 600 calories\n- Lentil plate:\n  * 200g lentils (cooked)\n  * 150g brown rice\n  * 200g roasted vegetables\n  * 30g pumpkin seeds\n  * Herbs and spices\n\n5. Budget Considerations:\n- Buy in bulk: legumes, grains, nuts\n- Seasonal vegetables and fruits\n- Estimated daily cost: $12-15\n- Can reduce cost by:\n  * Buying dried legumes instead of canned\n  * Using frozen berries\n  * Seasonal produce selection\n\nThis plan provides:\n- Complete proteins through combinations\n- High-fiber content\n- Natural anti-inflammatory foods\n- Adequate energy for training\n- All essential nutrients except B12 (medical supervision recommended)",
+    "test_case": {
+      "prompt_inputs": {
+        "height": "178",
+        "weight": "75",
+        "goal": "Build muscle mass through crossfit training while following a whole-food vegan diet",
+        "restrictions": "Vegan, no processed foods, no supplements"
+      },
+      "solution_criteria": [
+        "Includes 3 full meals for one day",
+        "All foods are whole-food vegan (no processed items)",
+        "Provides adequate protein sources for muscle building",
+        "Meals are properly timed around training"
+      ],
+      "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+      "scenario": "Test with a vegan crossfit athlete looking to build muscle mass while avoiding processed foods and supplements"
+    },
+    "score": 9,
+    "reasoning": "The solution meets all mandatory requirements by including detailed caloric totals (2800), complete macro breakdown, and specific meals with exact portions and timing. The meal plan successfully incorporates adequate vegan protein sources through combinations of legumes, grains, nuts and seeds. All ingredients are whole foods with no processed items. Meals are generally well-timed around training, though workout timing could be more explicit."
+  },
+  {
+    "output": "Let me create a meal plan following those steps:\n\n1. Daily Calorie Calculation:\n- Base metabolic rate (BMR): ~1,680 calories\n- Activity factor for endurance training: x1.7\n- Total daily calories needed: ~2,850 calories\n\n2. Macronutrient Distribution:\n- Protein: 20% (143g) = 570 calories\n- Fat: 25% (79g) = 710 calories\n- Carbs: 55% (390g) = 1,570 calories\n\n3. Meal Timing Plan:\n- Pre-run breakfast (2 hours before): 6:00 AM\n- Post-run snack: 9:30 AM\n- Lunch: 1:00 PM\n- Afternoon snack: 4:00 PM\n- Dinner: 7:00 PM\n\n4. Meal Plan:\n\nBreakfast (6:00 AM) - Pre-run\n- 1 cup steel-cut oats (40g)\n- 1 medium banana (120g)\n- 2 tbsp chia seeds (24g)\n- 1 cup Greek yogurt (200g)\n- 1 tbsp honey (21g)\n\nPost-run Snack (9:30 AM)\n- 2 whole-grain toast slices (60g)\n- 2 hard-boiled eggs\n- 1 medium apple (180g)\n\nLunch (1:00 PM)\n- 150g grilled chicken breast\n- 1 cup quinoa (185g cooked)\n- 2 cups mixed vegetables (200g)\n- 1 tbsp olive oil (15ml)\n\nAfternoon Snack (4:00 PM)\n- 30g almonds\n- 1 medium orange (130g)\n- 1 cup cottage cheese (225g)\n\nDinner (7:00 PM)\n- 180g salmon fillet\n- 1 medium sweet potato (150g)\n- 2 cups leafy greens (100g)\n- 1 tbsp olive oil (15ml)\n\n5. Total Nutrients:\n- Calories: ~2,850\n- Protein: 143g\n- Carbs: 390g (evenly distributed)\n- Fiber: 45g\n- Fat: 79g\n\n6. Budget Considerations:\n- Choose frozen vegetables when fresh are expensive\n- Buy proteins in bulk when on sale\n- Use seasonal fruits\n- Consider less expensive fish alternatives like tilapia\n\nAdditional Notes:\n- All carbohydrates are complex, low-glycemic options\n- Meals are timed to maintain stable blood sugar\n- Portion sizes can be adjusted based on blood glucose monitoring\n- Recommend carrying glucose tablets during run for emergency\n- Stay hydrated with water throughout the day",
+    "test_case": {
+      "prompt_inputs": {
+        "height": "175",
+        "weight": "68",
+        "goal": "Complete daily 15km training run while maintaining stable blood sugar levels for upcoming marathon",
+        "restrictions": "Type 2 diabetes requiring careful carbohydrate timing and monitoring, no artificial sweeteners"
+      },
+      "solution_criteria": [
+        "Includes 3-4 main meals and 2-3 snacks spread throughout the day",
+        "Specifies meal timing relative to training run",
+        "Incorporates low glycemic index carbohydrates",
+        "Lists portion sizes for carbohydrate-containing foods"
+      ],
+      "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+      "scenario": "Test with an aging marathon runner with diabetes who needs balanced blood sugar levels throughout training day"
+    },
+    "score": 10,
+    "reasoning": "Solution includes all mandatory elements (caloric total, macro breakdown, and portioned meals with timing) plus meets all secondary criteria around meal frequency, training coordination, low GI carbs, and portion specifications. The meal plan is well-structured for a diabetic athlete with 3 main meals and 2 snacks timed around training."
+  },
+  {
+    "output": "Let me create a meal plan following those steps:\n\n1. Daily Calories: Using 4750 calories (middle of 4500-5000 range)\n\n2. Macronutrient Breakdown:\n- Carbs (60%): 2850 calories = 712.5g\n- Protein (25%): 1187.5 calories = 296.9g\n- Fat (15%): 712.5 calories = 79.2g\n\n3. Meal Timing (assuming morning training):\n- Pre-workout breakfast (5:30 AM)\n- Post-workout meal (9:00 AM)\n- Lunch (12:30 PM)\n- Afternoon snack (3:30 PM)\n- Dinner (7:00 PM)\n- Evening snack (9:00 PM)\n\n4. & 5. Meal Plan with Portions:\n\nPre-workout (5:30 AM) - 750 calories\n- Oatmeal (100g): 389 cal\n- Banana (150g): 134 cal\n- Honey (30g): 90 cal\n- Almond butter (30g): 180 cal\n\nPost-workout (9:00 AM) - 1000 calories\n- Sweet potato (300g): 258 cal\n- Grilled chicken breast (200g): 330 cal\n- White rice (150g): 195 cal\n- Mixed berries (200g): 65 cal\n\nLunch (12:30 PM) - 1200 calories\n- Lean beef (200g): 434 cal\n- Brown rice (200g): 260 cal\n- Steamed vegetables (300g): 105 cal\n- Avocado (100g): 160 cal\n\nAfternoon Snack (3:30 PM) - 600 calories\n- Rice cakes (4 pieces): 140 cal\n- Turkey (100g): 157 cal\n- Apple (200g): 104 cal\n- Trail mix (80g): 400 cal\n\nDinner (7:00 PM) - 800 calories\n- Grilled salmon (200g): 412 cal\n- Quinoa (150g): 180 cal\n- Roasted vegetables (300g): 105 cal\n- Olive oil (15g): 120 cal\n\nEvening Snack (9:00 PM) - 400 calories\n- Rice-based cereal (80g): 300 cal\n- Almond milk (250ml): 30 cal\n- Dates (40g): 120 cal\n\nAll foods chosen are dairy-free and easily digestible. Focus is on simple carbs around workout times and complex carbs at other meals.\n\n6. Budget considerations:\n- Can substitute expensive items (salmon, beef) with cheaper protein sources like chicken, eggs, or legumes\n- Buy frozen vegetables instead of fresh\n- Purchase rice and oats in bulk\n- Use seasonal fruits\n\nThis plan provides adequate fuel for training while avoiding dairy and hard-to-digest foods before the competition.",
+    "test_case": {
+      "prompt_inputs": {
+        "height": "183",
+        "weight": "82",
+        "goal": "Maintain weight while maximizing energy for Olympic swimming qualification meet in 2 days. Need 4500-5000 daily calories with 60% carbs, 25% protein.",
+        "restrictions": "No dairy, needs easily digestible foods"
+      },
+      "solution_criteria": [
+        "Includes 3 full meals plus snacks totaling 4500-5000 calories",
+        "Maintains approximately 60% carbs, 25% protein macro ratio",
+        "Avoids dairy and includes only easily digestible foods"
+      ],
+      "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+      "scenario": "Test with a competitive swimmer preparing for a major competition, requiring high carbs and protein while staying within caloric goals for weight class"
+    },
+    "score": 10,
+    "reasoning": "Solution provides complete meal plan totaling 4750 calories with proper macro split (60/25/15), includes exact portions and timing for 3 meals plus snacks, avoids dairy, and emphasizes digestible foods. All mandatory requirements are met with detailed implementation."
+  }
+]
