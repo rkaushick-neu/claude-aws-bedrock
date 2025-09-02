@@ -10,7 +10,7 @@ This repository contains my notes for the [Claude with Amazon Bedrock](https://a
 1. [Working with the Amazon AWS Bedrock API](./1_BEDROCK_API.md)
 2. [Prompt Evaluations](./2_PROMPT_EVALS.md)
 3. [Prompt Engineering](./3_PROMPT_ENG.md)
-4. Tool Use
+4. [Tool Use](./4_TOOL_USE.md)
 5. Retrieval Augmented Generation
 6. Features of Claude
 7. Model Context Protocol
