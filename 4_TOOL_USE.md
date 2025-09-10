@@ -214,3 +214,165 @@ Whenever we receive a message from the assistant that the `stop_reason` is *tool
 2. **end_turn:** Model finished generating it's assistant message
 3. **max_tokens:** Model hit output token limit
 4. **stop_sequence:** Model has encountered one of the user provided stop sequences
+
+## Batch Tool Use (For Parallel Tool Use)
+
+When the user asks a question, the newer versions of Claude (like Sonnet 4) can natively request to run multiple tools. However older versions, would sequentially request each tool.
+
+### Claude Sonnet 4 (Requesting Multiple Tools)
+
+```json
+[{"role": "user",
+  "content": [{"text": "What is March 12th, 2025 + 50 days? Also, what is March 12th, 2025 + 100 days?"}]},
+ {"role": "assistant",
+  "content": [{"text": "I'll calculate those future dates for you by adding the specified number of days to March 12th, 2025."},
+   {"toolUse": {"toolUseId": "tooluse_RdoGanMgR9a7TVW05tn99A",
+     "name": "add_duration_to_datetime",
+     "input": {"datetime_str": "2025-03-12",
+      "duration": 50,
+      "input_format": "%Y-%m-%d",
+      "unit": "days"}}}]},
+ {"role": "user",
+  "content": [{"toolResult": {"toolUseId": "tooluse_RdoGanMgR9a7TVW05tn99A",
+     "content": [{"text": "Thursday, May 01, 2025 12:00:00 AM"}],
+     "status": "success"}}]},
+ {"role": "assistant",
+  "content": [{"toolUse": {"toolUseId": "tooluse_3fBhKHG7TcGo_MUT4DPCkQ",
+     "name": "add_duration_to_datetime",
+     "input": {"duration": 100,
+      "unit": "days",
+      "datetime_str": "2025-03-12",
+      "input_format": "%Y-%m-%d"}}}]},
+ {"role": "user",
+  "content": [{"toolResult": {"toolUseId": "tooluse_3fBhKHG7TcGo_MUT4DPCkQ",
+     "content": [{"text": "Friday, June 20, 2025 12:00:00 AM"}],
+     "status": "success"}}]},
+ {"role": "assistant",
+  "content": [{"text": "Here are your results:\n\n- March 12th, 2025 + 50 days = Thursday, May 1st, 2025\n- March 12th, 2025 + 100 days = Friday, June 20th, 2025"}]}]
+```
+
+### Claude Sonnet 3.7 (Requesting One Tool at a Time)
+
+```json
+[{"role": "user",
+  "content": [{"text": "What is March 12th, 2025 + 50 days? Also, what is March 12th, 2025 + 100 days?"}]},
+ {"role": "assistant",
+  "content": [{"text": "I'll calculate those future dates for you by adding the specified number of days to March 12th, 2025."},
+   {"toolUse": {"toolUseId": "tooluse_RdoGanMgR9a7TVW05tn99A",
+     "name": "add_duration_to_datetime",
+     "input": {"datetime_str": "2025-03-12",
+      "duration": 50,
+      "input_format": "%Y-%m-%d",
+      "unit": "days"}}}]},
+ {"role": "user",
+  "content": [{"toolResult": {"toolUseId": "tooluse_RdoGanMgR9a7TVW05tn99A",
+     "content": [{"text": "Thursday, May 01, 2025 12:00:00 AM"}],
+     "status": "success"}}]},
+ {"role": "assistant",
+  "content": [{"toolUse": {"toolUseId": "tooluse_3fBhKHG7TcGo_MUT4DPCkQ",
+     "name": "add_duration_to_datetime",
+     "input": {"duration": 100,
+      "unit": "days",
+      "datetime_str": "2025-03-12",
+      "input_format": "%Y-%m-%d"}}}]},
+ {"role": "user",
+  "content": [{"toolResult": {"toolUseId": "tooluse_3fBhKHG7TcGo_MUT4DPCkQ",
+     "content": [{"text": "Friday, June 20, 2025 12:00:00 AM"}],
+     "status": "success"}}]},
+ {"role": "assistant",
+  "content": [{"text": "Here are your results:\n\n- March 12th, 2025 + 50 days = Thursday, May 1st, 2025\n- March 12th, 2025 + 100 days = Friday, June 20th, 2025"}]}]
+```
+
+If want to **FORCE Claude** to call multiple tools we can create another tool called 'Batch Tool'. In our JSON tool spec we must mention:
+
+1. Name & description of the tool:
+    ```json
+    {
+        "name": "batch_tool",
+        "description": "Invoke multiple other tool calls simultaneously",
+    }
+    ```
+2. Input arguments to the batch tool:
+   - This will be a list of tool calls. Each tool call must have the parameters - name (of the tool to be called) & args for that tool call.
+    ```json
+    {
+        "json": {
+            "type": "object",
+            "properties": {
+                "invocations": {
+                    "type": "array",
+                    "description": "The tool calls to invoke",
+                    "items": {
+                        "types": "object",
+                        "properties": {
+                            "name": {
+                                "types": "string",
+                                "description": "The name of the tool to invoke",
+                            },
+                            "arguments": {
+                                "types": "string",
+                                "description": "The arguments to the tool, encoded as a JSON string",
+                            },
+                        },
+                    },
+                }
+            },
+        }
+    }
+    ```
+    (Note: This is not the entire JSON spec, please refer to the `batch_tool_schema` in the [001_tools.ipynb](./notebooks/4-tool-use/001_tools.ipynb) notebook.)
+
+Next we need to define the tool:
+
+```python
+def run_batch(tool_input):
+    batch_output = []
+    for invocation in tool_input["invocations"]:
+        tool_name = invocation["name"]
+        # arguments (as mentioned in the batch JSON spec) is a JSON encoded string
+        # so we need to convert the json string to json:
+        args = json.loads(invocation["arguments"])
+
+        tool_output = run_tool(tool_name, args)
+        batch_output.append({"tool_name": tool_name, "output": tool_output})
+    return batch_output
+```
+
+And need to make sure that in our `run_tool` function, we call the above function:
+
+```python
+def run_tool(tool_name, tool_input):
+    # TODO: tutorial says to hard-code but there must be a better way
+    if tool_name == "get_current_datetime":
+        # we use the ** in the input because it is a dictionary input
+        return get_current_datetime(**tool_input)
+    # multiple other elifs ... 
+    elif tool_name == "batch_tool":
+        # notice how we don't add the splat (**) because we want to pass it as a dictionary
+        return run_batch(tool_input)
+    else:
+        raise Exception(f"Unknown tool name: {tool_name}")
+```
+
+### Claude Sonnet 3.7 (Again with Batch Tool)
+
+Now when we run this again, we can see that Claude has correctly called the batch tools with the two tool calls in one go:
+
+```json
+[{"role": "user",
+  "content": [{"text": "What is March 12th, 2025 + 50 days? Also, what is March 12th, 2025 + 100 days?"}]},
+ {"role": "assistant",
+  "content": [{"text": "I'll calculate the dates that are 50 and 100 days after March 12th, 2025 for you."},
+   {"toolUse": {"toolUseId": "tooluse_L6ZM9CvLRoW0M-_PkCYhZw",
+     "name": "batch_tool",
+     "input": {"invocations": [{"name": "add_duration_to_datetime",
+        "arguments": "{'datetime_str': '2025-03-12', 'duration': 50, 'unit': 'days', 'input_format': '%Y-%m-%d'}"},
+       {"name": "add_duration_to_datetime",
+        "arguments": "{'datetime_str': '2025-03-12', 'duration': 100, 'unit': 'days', 'input_format': '%Y-%m-%d'}"}]}}}]},
+ {"role": "user",
+  "content": [{"toolResult": {"toolUseId": "tooluse_L6ZM9CvLRoW0M-_PkCYhZw",
+     "content": [{"text": "[{'tool_name': 'add_duration_to_datetime', 'output': 'Thursday, May 01, 2025 12:00:00 AM'}, {'tool_name': 'add_duration_to_datetime', 'output': 'Friday, June 20, 2025 12:00:00 AM'}]"}],
+     "status": "success"}}]},
+ {"role": "assistant",
+  "content": [{"text": "Here are the results:\n\n- March 12th, 2025 + 50 days = Thursday, May 1st, 2025\n- March 12th, 2025 + 100 days = Friday, June 20th, 2025"}]}]
+```
