@@ -2,6 +2,7 @@
 
 Relevant Notebooks:
 - [001_tools.ipynb](./notebooks/4-tool-use/001_tools.ipynb)
+- [003_structured_data](./notebooks/4-tool-use/003_structured_data.ipynb)
 
 
 LLMs do not have access to up-to-date data & have only knowledge on what they have been trained on. Tools create a bridge between Claude & external data sources.
@@ -376,3 +377,26 @@ Now when we run this again, we can see that Claude has correctly called the batc
  {"role": "assistant",
   "content": [{"text": "Here are the results:\n\n- March 12th, 2025 + 50 days = Thursday, May 1st, 2025\n- March 12th, 2025 + 100 days = Friday, June 20th, 2025"}]}]
 ```
+
+## Structured Output With Tools
+
+Initially we used message prefill & stop sequences to generate specific outputs (like code generation). However, we can ask Claude to use tools to provide more reliable output but at the **cost of complexity**. Depending upon the scenario, we may want to use the former rather than the later because of the setup & complexities.
+
+### Approach
+
+1. First we define an input JSON schema & force Claude to call the tool based on specific input parameters:
+    ![Input JSON Schema for the Tool](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748558131%2F08_-_010_-_Structured_Data_with_Tools_02.1748558130925.png)
+2. Next, we send our question to Claude along with the JSON schema.
+3. Claude responds with the mandatory tool call with the extracted JSON (from the user query). 
+4. The JSON input to the tool is in the format we require, so we take the JSON and don't need to respond back to Claude.
+
+We usually prefer this approach if we specifically need Claude to return results in a JSON format.
+
+### Key Benefits of Using a Tool for Structured Output
+
+- More reliable than prompt-based extraction
+- Guaranteed structure matching the required schema
+- No need for message prefilling or stop sequences
+- Built in validation through the tool schema
+
+(Only trade-off is that we need to write a detailed schema and handle tool responses.)
