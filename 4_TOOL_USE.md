@@ -1,19 +1,53 @@
 # 4. Tool Use
 
+LLMs do not have access to up-to-date data & have only knowledge on what they have been trained on. Tools create a bridge between Claude & external data sources.
+
 Relevant Notebooks:
 - [001_tools.ipynb](./notebooks/4-tool-use/001_tools.ipynb)
 - [003_structured_data.ipynb](./notebooks/4-tool-use/003_structured_data.ipynb)
 - [005_text_editor_tool.ipynb](./notebooks/4-tool-use/005_text_editor_tool.ipynb)
 
+## Table of Contents
 
-LLMs do not have access to up-to-date data & have only knowledge on what they have been trained on. Tools create a bridge between Claude & external data sources.
+- [4. Tool Use](#4-tool-use)
+  - [Table of Contents](#table-of-contents)
+  - [How Tool Use Works](#how-tool-use-works)
+  - [Steps to Making Tools](#steps-to-making-tools)
+  - [Use Case](#use-case)
+  - [1. Tools Functions](#1-tools-functions)
+  - [2. JSON Schema Specifications](#2-json-schema-specifications)
+    - [Purpose](#purpose)
+    - [Best Practices](#best-practices)
+  - [3. Call Claude with JSON  (\& Receive a ToolUse Part)](#3-call-claude-with-json---receive-a-tooluse-part)
+    - [Controlling Tool Use Using 'toolChoice'](#controlling-tool-use-using-toolchoice)
+      - [Response from Claude After Sending the JSON Spec](#response-from-claude-after-sending-the-json-spec)
+    - [Assistant Message](#assistant-message)
+  - [4. Run The Tool (\& Second ToolResult Part)](#4-run-the-tool--second-toolresult-part)
+    - [Run The Tools](#run-the-tools)
+  - [5. Send Tool Result To Claude](#5-send-tool-result-to-claude)
+  - [Conversation Loop (with \& without tool calls)](#conversation-loop-with--without-tool-calls)
+    - [Different Stop Reasons](#different-stop-reasons)
+  - [Batch Tool Use (For Parallel Tool Use)](#batch-tool-use-for-parallel-tool-use)
+    - [Claude Sonnet 4 (Requesting Multiple Tools)](#claude-sonnet-4-requesting-multiple-tools)
+    - [Claude Sonnet 3.7 (Requesting One Tool at a Time)](#claude-sonnet-37-requesting-one-tool-at-a-time)
+    - [Claude Sonnet 3.7 (Again with Batch Tool)](#claude-sonnet-37-again-with-batch-tool)
+  - [Structured Output With Tools](#structured-output-with-tools)
+    - [Approach](#approach)
+    - [Key Benefits of Using a Tool for Structured Output](#key-benefits-of-using-a-tool-for-structured-output)
+  - [Flexible Tool for Structured Data Extraction](#flexible-tool-for-structured-data-extraction)
+  - [Claude's Text Editor Tool](#claudes-text-editor-tool)
+    - [Understanding With An Example](#understanding-with-an-example)
+    - [Commands](#commands)
+      - [Defining Commands](#defining-commands)
+    - [Practical Application](#practical-application)
 
 ## How Tool Use Works
 
 1. Initial Request:  You send Claude a question along with instructions on how to get extra data.
 2. Tool Request: Claude analyses the question and decides it needs specific external data.
 3. Data Retrieval: The requested information is fetched from the tool.
-4. Final Response: Claude uses the external data to provide a complete answer.
+4. Tool Response: We run the requested tool and send the output to Claude. 
+5. Final Response: Claude uses the tool response to provide a complete answer.
 
 ## Steps to Making Tools
 
@@ -156,7 +190,22 @@ When the response has "stopReason" as "tool_use".
 
 Once we get the assistant message, we need to run the tool and the result of the tool needs to be sent back to Claude as a user message while including a **ToolResult Part**.
 
-### Run The Tool
+### Run The Tools
+
+To run a tool we define a `run_tool` function:
+
+```python
+# runs the specific tool based on the input it requires
+def run_tool(tool_name, tool_input):
+    # TODO: tutorial says to hard-code but there must be a better way
+    if tool_name == "get_current_datetime":
+        # we use the ** in the input because it is a dictionary input
+        return get_current_datetime(**tool_input)
+    # multiple more elif statements if required ...
+    else:
+        raise Exception(f"Unknown tool name: {tool_name}")
+```
+
 ```python
 # this is the function that goes thru each of the tools and calls the run_tool function (which in turn calls the tool method definition)
 def run_tools(parts):
@@ -209,6 +258,23 @@ We take the above result and add it into the messages as follows:
 ## Conversation Loop (with & without tool calls)
 
 Whenever we receive a message from the assistant that the `stop_reason` is *tool_use*, we need to execute the tool and resend the message back to Claude. If `stop_reason` is not present, we can end the loop.
+
+```python
+def run_conversation(messages):
+    while True:
+        result = chat(messages=messages, tools=[get_current_datetime_schema])
+
+        add_assistant_message(messages, result["parts"])
+        print(result["text"])
+
+        if(result["stop_reason"] != "tool_use"):
+            break
+
+        tool_result_parts = run_tools(result["parts"])
+        add_user_message(messages, tool_result_parts)
+
+    return messages
+```
 
 ### Different Stop Reasons
 
@@ -367,14 +433,29 @@ Now when we run this again, we can see that Claude has correctly called the batc
   "content": [{"text": "I'll calculate the dates that are 50 and 100 days after March 12th, 2025 for you."},
    {"toolUse": {"toolUseId": "tooluse_L6ZM9CvLRoW0M-_PkCYhZw",
      "name": "batch_tool",
-     "input": {"invocations": [{"name": "add_duration_to_datetime",
-        "arguments": "{'datetime_str': '2025-03-12', 'duration': 50, 'unit': 'days', 'input_format': '%Y-%m-%d'}"},
-       {"name": "add_duration_to_datetime",
-        "arguments": "{'datetime_str': '2025-03-12', 'duration': 100, 'unit': 'days', 'input_format': '%Y-%m-%d'}"}]}}}]},
+     "input": {
+        "invocations": [
+            {
+                "name": "add_duration_to_datetime",
+                "arguments": "{'datetime_str': '2025-03-12', 'duration': 50, 'unit': 'days', 'input_format': '%Y-%m-%d'}"
+            },
+            {
+                "name": "add_duration_to_datetime",
+                "arguments": "{'datetime_str': '2025-03-12', 'duration': 100, 'unit': 'days', 'input_format': '%Y-%m-%d'}"
+            }
+        ]
+    }}}]},
  {"role": "user",
-  "content": [{"toolResult": {"toolUseId": "tooluse_L6ZM9CvLRoW0M-_PkCYhZw",
-     "content": [{"text": "[{'tool_name': 'add_duration_to_datetime', 'output': 'Thursday, May 01, 2025 12:00:00 AM'}, {'tool_name': 'add_duration_to_datetime', 'output': 'Friday, June 20, 2025 12:00:00 AM'}]"}],
-     "status": "success"}}]},
+  "content": [
+    {
+        "toolResult": {
+            "toolUseId": "tooluse_L6ZM9CvLRoW0M-_PkCYhZw",
+            "content": [
+                {"text": "[{'tool_name': 'add_duration_to_datetime', 'output': 'Thursday, May 01, 2025 12:00:00 AM'}, {'tool_name': 'add_duration_to_datetime', 'output': 'Friday, June 20, 2025 12:00:00 AM'}]"}
+            ],
+     "status": "success"}
+     }]
+ },
  {"role": "assistant",
   "content": [{"text": "Here are the results:\n\n- March 12th, 2025 + 50 days = Thursday, May 1st, 2025\n- March 12th, 2025 + 100 days = Friday, June 20th, 2025"}]}]
 ```
@@ -440,3 +521,89 @@ When you call to_json, pass in the following structure:
 ```
 
 Now when we can call Claude to force it to use the `to_json` tool and it will provide us with the required json format.
+
+## Claude's Text Editor Tool
+
+The text editor tool is directly built-into Claude.
+
+This gives Claude the ability to:
+- View file or directory contents
+- View specific range of lines in a file
+- Replace text in a file
+- Create new files
+- Insert text at specific lines in a file
+- Undo recent edits to files
+
+
+Only the json schema is built in, we must provide the implementation of the actual tool.
+
+![Need to define only the function](./images/TextEditorToolRequirement.png)
+
+### Understanding With An Example
+
+Consider we want to read the contents of a file. Here is what the message exchange between Claude will look like:
+
+![diagrammatic flow of what happened](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748558133%2F08_-_012_-_The_Text_Editor_Tool_12.1748558133215.png)
+
+As we can see in Claude's tool use part, it sent:
+```json
+{
+    "command": "view",
+    "path": "./main_file.py"
+}
+```
+
+### Commands
+
+There are 5 commands which the text editor tool might send as a response to our application:
+
+1. **"view":** View/ read the contents of a file or directory
+2. **"str_replace":** Replace a specific string in a file with a new string
+3. **"create":** Create a file with somme initial content
+4. **"insert":** Insert text at a specific line number in a file
+5. **"undo_edit":** Undo the last edit made to a file
+
+We need to write out code for each of these specific cases.
+
+#### Defining Commands
+
+For each of the above commands, we must define a concrete function in the `TextEditorTool` class, and in our `run_tool` function, we must call the respective function as follows:
+
+```python
+text_editor_tool = TextEditorTool()
+
+def run_tool(tool_name, tool_input):
+    if tool_name == "str_replace_editor":
+        command = tool_input.get("command", "")
+        if command == "view":
+            path = tool_input.get("path", "")
+            view_range = tool_input.get("view_range", None)
+            return text_editor_tool.view(path, view_range)
+        elif command == "str_replace":
+            path = tool_input.get("path", "")
+            old_str = tool_input.get("old_str", "")
+            new_str = tool_input.get("new_str", "")
+            return text_editor_tool.str_replace(path, old_str, new_str)
+        elif command == "create":
+            # ...
+        elif command == "insert":
+            # ...
+        elif command == "undo_edit":
+            # ...
+        else:
+            raise Exception(f"Unknown text editor command: {command}")
+    else:
+        raise Exception(f"Unknown tool name: {tool_name}")
+```
+
+### Practical Application
+
+The Text Editor Tool essentially turns Claude into a code assistant that can:
+
+- Read existing code and provide analysis
+- Create new files and functions
+- Modify existing code
+- Set up test files
+- Refactor code across multiple files
+
+The `calculate_pi` method in the [main_file.py](./notebooks/4-tool-use/main_file.py) & the [test_main_file.py](./notebooks/4-tool-use/test_main_file.py) has been generated by Claude.
