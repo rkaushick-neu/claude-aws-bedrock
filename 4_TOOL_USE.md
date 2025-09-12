@@ -2,7 +2,8 @@
 
 Relevant Notebooks:
 - [001_tools.ipynb](./notebooks/4-tool-use/001_tools.ipynb)
-- [003_structured_data](./notebooks/4-tool-use/003_structured_data.ipynb)
+- [003_structured_data.ipynb](./notebooks/4-tool-use/003_structured_data.ipynb)
+- [005_text_editor_tool.ipynb](./notebooks/4-tool-use/005_text_editor_tool.ipynb)
 
 
 LLMs do not have access to up-to-date data & have only knowledge on what they have been trained on. Tools create a bridge between Claude & external data sources.
@@ -400,3 +401,42 @@ We usually prefer this approach if we specifically need Claude to return results
 - Built in validation through the tool schema
 
 (Only trade-off is that we need to write a detailed schema and handle tool responses.)
+
+## Flexible Tool for Structured Data Extraction
+
+Here is a flexible tool schema, `to_json`, that we can use:
+
+```json
+{
+    "toolSpec": {
+        "name": "to_json",
+        "description": "This tool processes any JSON data and can be used for generating structured content, transforming information, or creating any JSON-based output needed for your task.",
+        "inputSchema": {
+            "json": {"type": "object", "additionalProperties": true}
+        },
+    }
+}
+```
+
+Therefore instead of defining the structure in the JSON schema, we can easily define it in the prompt as follows:
+
+```python
+add_user_message(messages, 
+f"""
+Analyze the article below and extract key data. Then call the to_json tool.
+
+<article_text>
+{result['text']}
+</article_text>
+
+When you call to_json, pass in the following structure:
+{{
+        "title": str # title of the article,
+        "author": str # author of the article,
+        "topics": List[str] # List of topics mentioned in the article,
+        "num_topics": int # Number of topics mentioned
+}}
+""",)
+```
+
+Now when we can call Claude to force it to use the `to_json` tool and it will provide us with the required json format.
