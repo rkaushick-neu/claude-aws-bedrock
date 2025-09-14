@@ -14,7 +14,7 @@ This is not a good approach because:
 4. Long prompt = more $$$
 5. Long prompt = more time to process
 
-## Option 2: Break Document Into Chunks
+## Option 2: Include Relevant Chunks Into The Prompt
 
 In this approach we:
 1. Split the document into smaller **chunks**.
@@ -82,3 +82,25 @@ Chunking strategy is solely based on the use case:
 - **character based:** Most reliable fallback & works with any document type.
 - **sentence based:** Good balance of context and meaning for the prose.
 - **section based:** excellent results when you have consistent structure in documents.
+
+## Semantic Search Using Text Embeddings
+
+Once we have chunks of text, the next step in the RAG pipeline is to determine which chunks are related to a user query. We can't just do keyword based search, we need to understand both the meaning & context of the question and the chunks. In other words, we need to do semantic search using text embeddings.
+
+### Text Embeddings
+
+These are numeric representations of the meaning contained in the text. The text is converted into vectors (list of numbers ranging from -1 to 1). 
+
+![text embeddings](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748559465%2F09_-_003_-_Text_Embeddings_05.1748559464827.png)
+
+Each of these numbers represent a score for some quality or metric of the input. For example: 
+- how "happy" the text is
+- how much the text talks about "movies"
+- how much the text talks about "games"
+- ...
+
+We don't know exactly what each number denotes but the above examples state the idea of how each number can tell models about what information they contain.
+
+#### Why Embeddings Matter for RAG
+
+Embeddings are very useful because similar texts will have similar embedding values. This way we can mathematically compare a user's question to the chunks & find semantically similar ones - even if they are not worded the same way.
