@@ -75,3 +75,10 @@ Implementation can be challenging in plain text files or inconsistently formatte
 
 Here we divide text into groups of related sentences or sections. This would require us to use NLP techniques to understand the meaning of individual sentences so that similar ones can be placed in the same group. This is computationally expensive but can retrieve more relevant chunks.
 
+### Choosing the Right Strategy
+
+Chunking strategy is solely based on the use case:
+
+- **character based:** Most reliable fallback & works with any document type.
+- **sentence based:** Good balance of context and meaning for the prose.
+- **section based:** excellent results when you have consistent structure in documents.
