@@ -104,3 +104,28 @@ We don't know exactly what each number denotes but the above examples state the 
 #### Why Embeddings Matter for RAG
 
 Embeddings are very useful because similar texts will have similar embedding values. This way we can mathematically compare a user's question to the chunks & find semantically similar ones - even if they are not worded the same way.
+
+## RAG Flow
+
+1. Chunk the source text
+2. Generate embeddings & perform normalization
+3. Store in a vector database
+4. Process the user's query with the same embedding & normalization steps
+5. Find closest (most similar) embedding(s) to the user's query from the vector database using Cosine Similarity
+6. Build the final prompt with user's question & retrieved chunks.
+
+### Cosine Similarity
+
+![cosine similarity](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748559479%2F09_-_004_-_The_Full_RAG_Flow_14.1748559479684.png)
+
+```math
+\cos(\theta) = \frac{A \cdot B}{||A|| \cdot ||B||}
+``` 
+
+#### Cosine Distance
+
+```
+cosine distance = 1 - cosine similarity
+```
+
+Values closer to 0 mean high similarity and larger values mean less similarity.
