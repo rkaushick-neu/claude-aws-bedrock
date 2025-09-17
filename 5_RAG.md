@@ -129,3 +129,25 @@ cosine distance = 1 - cosine similarity
 ```
 
 Values closer to 0 mean high similarity and larger values mean less similarity.
+
+### Problem With Just Semantic Search
+
+Sometimes there are corner cases, where semantic search doesn't perform well. For instance, when we want to search for specific keywords.
+
+![prolem](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748559532%2F09_-_006_-_BM25_Lexical_Search_04.1748559532637.png)
+
+This is because semantic search focuses on the meaning rather than the exact word.
+
+### Hybrid Search Strategy
+
+![hybrid search](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748559533%2F09_-_006_-_BM25_Lexical_Search_05.1748559533271.png)
+
+#### Lexical Search with BM25
+
+**BM25 = Best Match 25**
+
+There are many methods for implementing text search, but BM25 is commonly used in RAG pipelines.
+
+![high-level bm25 algorithm](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748559533%2F09_-_006_-_BM25_Lexical_Search_07.1748559533735.png)
+
+This prioritizes `INC-2023-Q4-011` which is a very rare term in our report.
