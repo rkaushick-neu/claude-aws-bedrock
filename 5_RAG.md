@@ -8,6 +8,8 @@ Jupyter Notebooks:
 3. [003_vectordb.ipynb](./notebooks/5-rag/003_vectordb.ipynb)
 4. [004_bm25.ipynb](./notebooks/5-rag/004_bm25.ipynb)
 5. [005_hybrid.ipynb](./notebooks/5-rag/005_hybrid.ipynb)
+6. [006_reranking.ipynb](./notebooks/5-rag/006_reranking.ipynb)
+7. [007_contextual.ipynb](./notebooks/5-rag/007_contextual.ipynb)
 
 ## Option 1: Include The Entire Doc Into The Prompt 
 
@@ -158,6 +160,14 @@ This prioritizes `INC-2023-Q4-011` which is a very rare term in our report.
 
 ### Hybrid Search
 
+The process is as follows:
+1. Run your hybrid search (semantic search + BM25)
+2. Merge the results
+3. Pass the merged results to a re-ranker function
+4. The re-ranker sends everything to Claude with a specific prompt
+5. Claude returns a reordered list of the most relevant documents
+
+
 ```mermaid
 ---
 title: Hybrid RAG Class Diagram
@@ -208,6 +218,7 @@ classDiagram
 
     class Retriever {
         -_indexes: List[SearchIndex]
+        -_reranker_fn: Optional[Callable[[List[Dict[str, Any]], str, int], List[str]]]
         +__init__(*indexes: SearchIndex) None
         +add_document(document: Dict[str, Any]) None
         +search(query_text: str, k: int, k_rrf: int) List[Tuple[Dict[str, Any], float]]
@@ -224,4 +235,38 @@ classDiagram
     note for Retriever "Combines results using Reciprocal Rank Fusion (RRF)"
 ```
 
-![hybrid search](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748559538%2F09_-_007_-_A_Multi-Search_RAG_Pipeline_00.1748559537903.png)
+![hybrid search with llm reranking](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748559531%2F09_-_008_-_Reranking_Results_05.1748559531205.png)
+
+The LLM re-ranker increases latency but can significantly improve search accuracy by leveraging Claude's understanding of context & relevance.
+
+### Contextual Retrieval
+
+In the RAG pipeline, while performing the chunking, each chunk is independent from one another. However, sometimes, we need the chunks to have a relative understanding of the entire document. 
+
+Contextual retrieval helps solve this problem. At the time we chunk the text, we ask Claude to add context to each chunk based on the entire document (or some parts of the document). This pre-processing step helps Claude better retrieve context & helps it situate where it can get the required information.
+
+For each chunk, the prompt looks like the following:
+```
+Write a short and succinct snippet of text to situate this chunk within the 
+overall source document for the purposes of improving search retrieval of the chunk.
+
+Here is the original source document:
+<document>
+{source_text}
+</document>
+
+Here is the chunk we want to situate within the whole document:
+<chunk>
+{text_chunk}
+</chunk>
+
+Answer only with the succinct context and nothing else.
+```
+
+#### When Source Doc Is Too Long
+
+If the source document is too long to fit into the prompt for each chunk, we can take the first few (usually introductions or abstract) and the immediate last few chunks as source text:
+
+![Contextual retrieval when source doc is too large](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748559589%2F09_-_009_-_Contextual_Retrieval_08.1748559589486.png)
+
+Through contextual retrieval, the retriever understands not just whats there in each chunk, but how that information fits into the larger understanding of the entire document & how it relates to other sections.
