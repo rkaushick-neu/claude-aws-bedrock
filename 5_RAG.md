@@ -4,6 +4,10 @@ RAG is a technique which is useful when we want to retrieve/ extract relevant se
 
 Jupyter Notebooks:
 1. [001_chunking.ipynb](./notebooks/5-rag/001_chunking.ipynb)
+2. [002_embeddings.ipynb](./notebooks/5-rag/002_embeddings.ipynb)
+3. [003_vectordb.ipynb](./notebooks/5-rag/003_vectordb.ipynb)
+4. [004_bm25.ipynb](./notebooks/5-rag/004_bm25.ipynb)
+5. [005_hybrid.ipynb](./notebooks/5-rag/005_hybrid.ipynb)
 
 ## Option 1: Include The Entire Doc Into The Prompt 
 
@@ -151,3 +155,73 @@ There are many methods for implementing text search, but BM25 is commonly used i
 ![high-level bm25 algorithm](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748559533%2F09_-_006_-_BM25_Lexical_Search_07.1748559533735.png)
 
 This prioritizes `INC-2023-Q4-011` which is a very rare term in our report.
+
+### Hybrid Search
+
+```mermaid
+---
+title: Hybrid RAG Class Diagram
+---
+classDiagram
+    class SearchIndex {
+        <<interface>>
+        +add_document(document: Dict[str, Any]) None
+        +search(query: Any, k: int) List[Tuple[Dict[str, Any], float]]
+    }
+
+    class VectorIndex {
+        -vectors: List[List[float]]
+        -documents: List[Dict[str, Any]]
+        -_vector_dim: Optional[int]
+        -_distance_metric: str
+        -_embedding_fn: Optional[Callable]
+        +__init__(distance_metric: str, embedding_fn: Optional[Callable])
+        +add_vector(vector: List[float], document: Dict[str, Any]) None
+        +add_document(document: Dict[str, Any]) None
+        +search(query: Any, k: int) List[Tuple[Dict[str, Any], float]]
+        -_euclidean_distance(vec1: List[float], vec2: List[float]) float
+        -_dot_product(vec1: List[float], vec2: List[float]) float
+        -_magnitude(vec: List[float]) float
+        -_cosine_distance(vec1: List[float], vec2: List[float]) float
+    }
+
+    class BM25Index {
+        -documents: List[Dict[str, Any]]
+        -_corpus_tokens: List[List[str]]
+        -_doc_len: List[int]
+        -_doc_freqs: Dict[str, int]
+        -_avg_doc_len: float
+        -_idf: Dict[str, float]
+        -_index_built: bool
+        -k1: float
+        -b: float
+        -_tokenizer: Callable
+        +__init__(k1: float, b: float, tokenizer: Optional[Callable])
+        +add_document(document: Dict[str, Any]) None
+        +search(query: Any, k: int, score_normalization_factor: float) List[Tuple[Dict[str, Any], float]]
+        -_default_tokenizer(text: str) List[str]
+        -_update_stats_add(doc_tokens: List[str]) None
+        -_calculate_idf() None
+        -_build_index() None
+        -_compute_bm25_score(query_tokens: List[str], doc_index: int) float
+    }
+
+    class Retriever {
+        -_indexes: List[SearchIndex]
+        +__init__(*indexes: SearchIndex) None
+        +add_document(document: Dict[str, Any]) None
+        +search(query_text: str, k: int, k_rrf: int) List[Tuple[Dict[str, Any], float]]
+    }
+
+    %% Relationships
+    SearchIndex <|.. VectorIndex : implements
+    SearchIndex <|.. BM25Index : implements
+    Retriever o-- SearchIndex : contains multiple
+
+    %% Notes
+    note for VectorIndex "Handles semantic search using cosine similarity"
+    note for BM25Index "Handles lexical search using BM25 algorithm"
+    note for Retriever "Combines results using Reciprocal Rank Fusion (RRF)"
+```
+
+![hybrid search](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748559538%2F09_-_007_-_A_Multi-Search_RAG_Pipeline_00.1748559537903.png)
