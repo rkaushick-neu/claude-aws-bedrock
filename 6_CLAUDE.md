@@ -81,3 +81,17 @@ Redacted Response:
     }
 ]
 ```
+
+## Image Support
+
+### Image Limitations
+
+![Image handling & limitations](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748559593%2F10_-_002_-_Image_Support_01.1748559593554.png)
+
+### Prompting Techniques
+
+We must use the same prompting techniques even when working with Claude such as by:
+- giving clear instructions or steps to follow
+- 1-shot or multi-shot prompting
+
+![Step by step instructions with images](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748559595%2F10_-_002_-_Image_Support_05.1748559595686.png)
