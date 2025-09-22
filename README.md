@@ -27,6 +27,7 @@ This repository contains my notes for the [Claude with Amazon Bedrock](https://a
 - [Prompt Engineering](./3_PROMPT_ENG.md) - Prompting techniques and best practices
 - [Tool Implementation](./4_TOOL_USE.md) - Advanced tool use
 - [RAG Techniques](./5_RAG.md) - Complete Retrieval Augmented Generation guide
+- [Claude Features](./6_CLAUDE.md) - Extended Thinking, Image and PDF Support, Citations, Prompt Caching
 
 ## Project Structure
 
@@ -37,12 +38,13 @@ claude-aws-bedrock/
 │   ├── 2_PROMPT_EVALS.md         # Prompt evaluation techniques
 │   ├── 3_PROMPT_ENG.md           # Prompt engineering strategies
 │   ├── 4_TOOL_USE.md             # Tool use and function calling
-│   └── 5_RAG.md                  # Retrieval Augmented Generation
+│   ├── 5_RAG.md                  # Retrieval Augmented Generation
+│   └── 6_CLAUDE.md               # Claude features and capabilities
 │
 ├── 📓 Jupyter Notebooks
 │   ├── 1-working-with-aws-bedrock/
 │   │   ├── 001_Api_Requests.ipynb           # Basic API requests
-│   │   ├── 002_System_Messages.ipynb        # System message configuration
+│   │   ├── 002_System_Messages_Temperature.ipynb  # Temperature control
 │   │   ├── 003_Streaming.ipynb              # Streaming responses
 │   │   └── 004_Controlling_Output.ipynb     # Output control techniques
 │   │
@@ -56,19 +58,23 @@ claude-aws-bedrock/
 │   ├── 4-tool-use/
 │   │   ├── 001_tools.ipynb                  # Tool use fundamentals
 │   │   ├── 003_structured_data.ipynb        # Structured data handling
-│   │   ├── 005_text_editor_tool.ipynb      # Text editor tool implementation
+│   │   ├── 005_text_editor_tool.ipynb       # Text editor tool implementation
 │   │   ├── main_file.py                     # Main application file
 │   │   └── test_main_file.py                # Test file
 │   │
-│   └── 5-rag/
-│       ├── 001_chunking.ipynb               # Text chunking strategies
-│       ├── 002_embeddings.ipynb             # Embedding generation
-│       ├── 003_vectordb.ipynb               # Vector database setup
-│       ├── 004_bm25.ipynb                   # BM25 retrieval
-│       ├── 005_hybrid.ipynb                 # Hybrid search methods
-│       ├── 006_reranking.ipynb              # Result reranking
-│       ├── 007_contextual.ipynb             # Contextual retrieval
-│       └── report.md                        # RAG analysis report
+│   ├── 5-rag/
+│   │   ├── 001_chunking.ipynb               # Text chunking strategies
+│   │   ├── 002_embeddings.ipynb             # Embedding generation
+│   │   ├── 003_vectordb.ipynb               # Vector database setup
+│   │   ├── 004_bm25.ipynb                   # BM25 retrieval
+│   │   ├── 005_hybrid.ipynb                 # Hybrid search methods
+│   │   ├── 006_reranking.ipynb              # Result reranking
+│   │   ├── 007_contextual.ipynb             # Contextual retrieval
+│   │   └── report.md                        # RAG analysis report
+│   │
+│   └── 6-claude-features/
+│       ├── 001_thinking.ipynb               # Claude's thinking capabilities
+│       └── 001_thinking_complete.ipynb      # Complete thinking example
 │
 ├── 📊 Evaluation Data
 │   └── evals/
@@ -80,7 +86,7 @@ claude-aws-bedrock/
 │
 ├── 📋 Configuration
 │   ├── requirements.txt                     # Python dependencies
-│   └── README.md                           # This file
+│   └── README.md                            # This file
 ```
 
 ## Setup
