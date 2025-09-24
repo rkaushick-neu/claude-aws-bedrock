@@ -1,5 +1,10 @@
 # 6. Claude Features
 
+Jupyter Notebooks:
+- [001_thinking.ipynb](./notebooks/6-claude-features/001_thinking.ipynb): Getting Claude to think before responding.
+- [002_images.ipynb](./notebooks/6-claude-features/002_images.ipynb): Sending images through the API.
+- [003_pdf.ipynb](./notebooks/6-claude-features/003_pdf.ipynb): Sending PDF documents through the API.
+
 ## Extended Thinking
 
 Thinking allows Claude to reason with itself before generating it's response to the user. This can be used for complex problems that require a logical step by step approach to solve the problem.
@@ -95,3 +100,41 @@ We must use the same prompting techniques even when working with Claude such as 
 - 1-shot or multi-shot prompting
 
 ![Step by step instructions with images](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748559595%2F10_-_002_-_Image_Support_05.1748559595686.png)
+
+## PDF Support
+
+PDF documents can be sent through the API (similar to images). 
+
+First we need to read the PDF file in bytes:
+
+```python
+with open("./earth.pdf", "rb") as f:
+    file_bytes = f.read()
+```
+
+Finally before sending the request to Claude, we would add the document into the user message as follows:
+
+```python
+add_user_message(
+    messages,
+    [
+        {   
+            "document": {
+                "format": "pdf", 
+                "name": "earth", # name of the doc without the extension
+                "source": {"bytes": file_bytes},
+            }
+        },
+        {"text": prompt},
+    ],
+)
+```
+
+### Claude's PDF Capabilities
+
+- Extract & summarize key information
+- Answer specific questions about document content
+- Analyze document structure & formatting
+- Process multi-page documents efficiently
+- Work with PDFs containing text & images
+
