@@ -32,15 +32,15 @@ The response from Claude when thinking is enabled:
 ```json
 [
     {
-        'reasoningContent': {
-            'reasoningText': {
-                'text': 'I need to write a concise one-paragraph guide to recursion in computer science. I should:\n1. Define what recursion is clearly\n2. Explain the key components (base case and recursive case)\n3. Mention why it's useful\n4. Perhaps include a simple conceptual example\n5. Keep it to one cohesive paragraph\n\nI'll aim to make it accessible but informative, avoiding overly technical language while still being precise.',
-                'signature': 'ErcBCkgIBxABGAIiQF3W5Yo2bMElMnzxHOqEdN32U0dWi9f4PAqGKx1Zm5bT4e+UH3eGoBQj...'
+        "reasoningContent": {
+            "reasoningText": {
+                "text": "I need to write a concise one-paragraph guide to recursion in computer science. I should:\n1. Define what recursion is clearly\n2. Explain the key components (base case and recursive case)\n3. Mention why it's useful\n4. Perhaps include a simple conceptual example\n5. Keep it to one cohesive paragraph\n\nI'll aim to make it accessible but informative, avoiding overly technical language while still being precise.",
+                "signature": "ErcBCkgIBxABGAIiQF3W5Yo2bMElMnzxHOqEdN32U0dWi9f4PAqGKx1Zm5bT4e+UH3eGoBQj..."
             }
         }
     },
     {
-        'text': '# A Guide to Recursion\n\nRecursion is a powerful programming concept where a function solves a problem by calling itself with simpler versions of the original problem, continuing this process until reaching a "base case" that can be solved directly without further recursion ...'
+        "text": "# A Guide to Recursion\n\nRecursion is a powerful programming concept where a function solves a problem by calling itself with simpler versions of the original problem, continuing this process until reaching a "base case" that can be solved directly without further recursion ..."
     }
 ]
 
@@ -77,12 +77,12 @@ Redacted Response:
 ```json
 [
     {
-        'reasoningContent': {
-            'redactedContent': 'EoUGCkgIBxABGAIqQKbnB9k1Sul5rvhN+DuWUV6izV/LYzMnIrdmjw8LYSSdeIQfUmPDm93tHMQdP5kBAaKwWcEEnuoWAt61...'
+        "reasoningContent": {
+            "redactedContent": "EoUGCkgIBxABGAIqQKbnB9k1Sul5rvhN+DuWUV6izV/LYzMnIrdmjw8LYSSdeIQfUmPDm93tHMQdP5kBAaKwWcEEnuoWAt61..."
         }
     },
     {
-        'text': 'I notice that your message contains what appears to be an attempt to manipulate my internal processing with some kind of "magic string" or trigger. I can\'t respond to commands that try to alter how my systems work.\n\nIf you have a genuine question or topic you\'d like to discuss, I\'d be happy to help you with that instead. Please feel free to share what you\'re actually interested in talking about, and I\'ll do my best to assist you.'
+        "text": "I notice that your message contains what appears to be an attempt to manipulate my internal processing with some kind of 'magic string' or trigger. I can't respond to commands that try to alter how my systems work.\n\nIf you have a genuine question or topic you'd like to discuss, I'd be happy to help you with that instead. Please feel free to share what you're actually interested in talking about, and I'll do my best to assist you."
     }
 ]
 ```
@@ -138,3 +138,83 @@ add_user_message(
 - Process multi-page documents efficiently
 - Work with PDFs containing text & images
 
+### PDF Citations
+
+There is an inbuilt feature in Claude which allows it to share citations of the text it used to generate the response. This adds an extra layer of trust that the LLM is not hallucinating or generating false information.
+
+To enable it we just need to add another property in the `document` dictionary:
+
+```python
+add_user_message(
+    messages,
+    [
+        {   
+            "document": {
+                "format": "pdf", 
+                "name": "earth", # name of the doc without the extension
+                "source": {"bytes": file_bytes},
+                "citations": {"enabled": True} #enabling the citations
+            }
+        },
+        {"text": prompt},
+    ],
+)
+```
+
+Now when we get a response, we will have multiple parts of the answer with the citations:
+
+```json
+{"parts": [
+    {
+        "citationsContent": {
+            "content": [{"text": "Earth's atmosphere and oceans were formed by volcanic activity and outgassing."}],
+            "citations": [{
+                "title": "earth",
+                "sourceContent": [{"text": "Earth's atmosphere and oceans were formed by volcanic activity and outgassing.\r\n"}],
+                "location": {
+                    "documentPage": {
+                        "documentIndex": 0,
+                        "start": 4,
+                        "end": 5
+                    }
+                }
+            }]
+        }
+    },
+    {
+        "text": " "
+    },
+    {
+        "citationsContent": {
+            "content": [{"text": "Water vapor from these sources condensed into the oceans, augmented by water and ice from asteroids, protoplanets, and comets."}],
+            "citations": [{
+                "title": "earth",
+                "sourceContent": [{"text": "[43] Water vapor from\r\nthese sources condensed into the oceans, augmented by water and ice from asteroids, protoplanets,\r\nand comets.\r\n"}],
+                "location": {
+                    "documentPage": {
+                        "documentIndex": 0,
+                        "start": 4,
+                        "end": 5
+                    }
+                }
+            }]
+        }
+    },
+]}
+```
+
+The same content formatted would look like the following:
+
+```markdown
+Earth's atmosphere and oceans were formed by volcanic activity and outgassing.¹ Water vapor from these sources condensed into the oceans, augmented by water and ice from asteroids, protoplanets, and comets.²
+...
+
+Citations
+
+¹ Source: Document "earth", Page 4-5
+"Earth's atmosphere and oceans were formed by volcanic activity and outgassing."
+
+² Source: Document "earth", Page 4-5
+"Water vapor from these sources condensed into the oceans, augmented by water and ice from asteroids, protoplanets, and comets."
+
+```
