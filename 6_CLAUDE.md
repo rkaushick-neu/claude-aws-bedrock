@@ -4,6 +4,7 @@ Jupyter Notebooks:
 - [001_thinking.ipynb](./notebooks/6-claude-features/001_thinking.ipynb): Getting Claude to think before responding.
 - [002_images.ipynb](./notebooks/6-claude-features/002_images.ipynb): Sending images through the API.
 - [003_pdf.ipynb](./notebooks/6-claude-features/003_pdf.ipynb): Sending PDF documents through the API.
+- [004_caching.ipynb](./notebooks/6-claude-features/004_caching.ipynb): Caching prompts & tools.
 
 ## Extended Thinking
 
@@ -218,3 +219,60 @@ Citations
 "Water vapor from these sources condensed into the oceans, augmented by water and ice from asteroids, protoplanets, and comets."
 
 ```
+
+## Prompt Caching
+
+Prompt caching is a feature which reduces latency and costs for repeated large prompts. This is because it doesn't have to recompute the work it did for the previous repeated prompt as it is stored in a cache.
+
+With every request internally Claude does the following:
+- tokenize the prompt
+- create embeddings for each token
+- add context based on surrounding text
+- generate output text
+
+Once the output text is generated & sent back to the client, all the work from the previous steps are deleted. However, if we keep those steps in the cache, then for each subsequent request, we don't need to re-compute these - helping save on cost and making it faster.
+
+![Pick up from cache if available](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748559584%2F10_-_003_-_Prompt_Caching_16.1748559584103.png)
+
+### Advantages of Caching
+
+![Advantages of Caching](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748559584%2F10_-_003_-_Prompt_Caching_18.1748559584591.png)
+
+### Enabling Prompt Caching
+
+Prompt caching is not enabled by default. To enable it, we must add a `cachePoint`. All the processing before the `cachePoint` will be stored, and the work only after that will be computed.
+
+![Cache Point](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2Fa46l9irobhg0f5webscixp0bs%2Fpublic%2F1748559641%2F10_-_004_-_Rules_of_Prompt_Caching_07.1748559641029.png)
+
+We can add cache points to any message:
+- user message/ assistant message &check;
+    ```python
+    user_message = {
+        "role": "user",
+        "content": [
+            {"text": "..."},
+            {"cachePoint": {"type": "default"}}
+        ]
+        }
+    ```    
+- tool definitions &check;
+    ```python
+    tools = [
+        {"toolSpec": add_duration_to_datetime_schema},
+        {"toolSpec": get_current_datetime_schema},
+        {"cachePoint": {"type": "default"}}
+    ]
+    ```
+- system prompts &check;
+    ```python
+    system = [
+        {"text": "You are a senior software..."},
+        {"cachePoint": {"type": "default"}}
+    ]
+    ```
+
+> [!TIP]
+> The most valuable caching opportunities are for the **tool spec** and **system prompt** as they rarely change between requests.
+
+> [!IMPORTANT]
+> The **minimum context must be 1024 tokens or longer** to be cached. This is the sum of all the parts that we are trying to cache before the cache point.
