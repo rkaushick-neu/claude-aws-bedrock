@@ -28,6 +28,8 @@ This repository contains my notes for the [Claude with Amazon Bedrock](https://a
 - [Tool Implementation](./4_TOOL_USE.md) - Advanced tool use
 - [RAG Techniques](./5_RAG.md) - Complete Retrieval Augmented Generation guide
 - [Claude Features](./6_CLAUDE.md) - Extended Thinking, Image and PDF Support, Citations, Prompt Caching
+- [Model Context Protocol](./7_MCP.md) - MCP Client, Server, Tools, Resources & Prompts
+- [AI Agents](./8_AGENTS.md) - Agents, Claude Code, MCP servers, Computer Use
 
 ## Project Structure
 
